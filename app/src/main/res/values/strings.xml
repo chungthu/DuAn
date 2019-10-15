@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Menu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Thêm sản phẩm</string>
+
+    <string name="menu_information">Thông tin cửa hàng</string>
+    <string name="menu_history">Lịch sử</string>
+    <string name="menu_money">Két tiền</string>
+    <string name="menu_statistical">Thống kê</string>
+    <string name="menu_add">Thêm tài khoản nhân viên</string>
+    <string name="menu_print">Máy in</string>
+    <string name="menu_logout">Đăng xuất</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_bread">Bánh mỳ</string>
+    <string name="title_milk_tea">Trà sữa</string>
+    <string name="title_fruit">Nước ép</string>
+
+    <string name="user">Tên tài khoản</string>
+    <string name="password">Mật khẩu</string>
+    <string name="btnLogin">Đăng nhập</string>
+    <string name="btnSizeM">Size M: 20.000 đ</string>
+    <string name="btnSizeL">Size L: 30.000 đ</string>
+    <string name="rd1">Giảm 20%</string>
+    <string name="rd3">Giảm 50%</string>
+    <string name="rd2">Giảm 30%</string>
+    <string name="btnAdd">Thêm</string>
+    <string name="btnCancel">Hủy</string>
+    <string name="activity_name">Danh sách hóa đơn</string>
+</resources>

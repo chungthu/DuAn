@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00bcd4</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="welcome">#ffffff</color>
+    <color name="btnlogin">#009688</color>
+    <color name="btnloginText">#ffffff</color>
+    <color name="QuenPass">#009688</color>
+    <color name="edtUser">#009688</color>
+    <color name="edtPass">#009688</color>
+    <color name="nav_header">#00bcd4</color>
+    <color name="check">#009688</color>
+    <color name="bottom">#00bcd4</color>
+    <color name="textbottom">#000000</color>
+    <color name="edtsoluong">#009688</color>
+    <color name="tvGhichu">#000000</color>
+    <color name="btnAdd">#009688</color>
+    <color name="btnstAdd">#ffffff</color>
+    <color name="btnCancel">#009688</color>
+    <color name="btnstCancel">#ffffff</color>
+    <color name="tvBill">#000000</color>
+    <color name="tvPrice">#ff0000</color>
+</resources>
