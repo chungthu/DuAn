@@ -1,48 +1,33 @@
 package vn.edu.poly.testduan2.model;
 
-public class Bread {
+public class Fruit {
 
     private String type;
-    private byte[] imgBread;
+    private byte[] imgFruit;
     private String title;
     private int price1;
     private int price2;
     private String topping;
 
-    public Bread(){
+    public Fruit(){
 
     }
 
-    public Bread(String type, byte[] imgBread, String title, int price1, int price2, String topping) {
+    public Fruit(String type, byte[] imgFruit, String title, int price1, int price2, String topping) {
         this.type = type;
-        this.imgBread = imgBread;
+        this.imgFruit = imgFruit;
         this.title = title;
         this.price1 = price1;
+        this.price2 = price2;
         this.topping = topping;
     }
 
-    public byte[] getImgBread() {
-        return imgBread;
+    public byte[] getImgFruit() {
+        return imgFruit;
     }
 
-    public void setImgBread(byte[] imgBread) {
-        this.imgBread = imgBread;
-    }
-
-    public String getTopping() {
-        return topping;
-    }
-
-    public void setTopping(String topping) {
-        this.topping = topping;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setImgFruit(byte[] imgFruit) {
+        this.imgFruit = imgFruit;
     }
 
     public int getPrice1() {
@@ -59,6 +44,22 @@ public class Bread {
 
     public void setPrice2(int price2) {
         this.price2 = price2;
+    }
+
+    public String getTopping() {
+        return topping;
+    }
+
+    public void setTopping(String topping) {
+        this.topping = topping;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getTitle() {

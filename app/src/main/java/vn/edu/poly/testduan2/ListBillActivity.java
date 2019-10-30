@@ -68,7 +68,6 @@ public class ListBillActivity extends AppCompatActivity implements View.OnClickL
 
         if (id == R.id.action_settings) {
             final Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.dialog_add_product);
             dialog.setTitle("Thêm hóa đơn");
 
             Button btnCancel;

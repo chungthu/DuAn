@@ -5,7 +5,8 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Thêm sản phẩm</string>
+    <string name="action_add_product">Thêm sản phẩm</string>
+    <string name="action_bill">Thêm hóa đơn</string>
 
     <string name="menu_information">Thông tin cửa hàng</string>
     <string name="menu_history">Lịch sử</string>
@@ -30,4 +31,31 @@
     <string name="btnAdd">Thêm</string>
     <string name="btnCancel">Hủy</string>
     <string name="activity_name">Danh sách hóa đơn</string>
+    <string name="action_list">Danh sách đơn</string>
+    <string name="action_logout">Đăng xuất</string>
+    <string name="title_activity_menu2">Menu</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="error_empty">Mời nhập tài khoản</string>
+    <string name="error_emptypass">Mời nhập mật khẩu</string>
+    <string name="lbl_set_profile_photo">Cài đặt ảnh</string>
+    <string name="lbl_take_camera_picture">Chụp ảnh</string>
+    <string name="lbl_choose_from_gallery">Chọn ảnh từ thư viện</string>
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="notify_empty_title_product">Yêu cầu nhập tên món ăn</string>
+    <string name="notify_empty_price1">Yêu cầu nhập giá sản phẩm</string>
+    <string name="tvtype">Thể loại</string>
+    <string name="tvName">Tên món</string>
+    <string name="tvImage">Ảnh</string>
+    <string name="tvPrice">Giá</string>
+    <string name="tvPrice1">Giá 1</string>
+    <string name="tvPrice2">Giá 2</string>
+    <string name="tvTopping">Topping</string>
+    <string name="tvToppingYes">Có</string>
+    <string name="tvToppingNo">Không</string>
+    <string name="tvRemember">Nhớ</string>
+    <string name="tvForgetPass">Quên mật khẩu ?</string>
+    <string name="tvType">Loại:</string>
+    <string name="tvname">Tên:</string>
 </resources>
