@@ -48,6 +48,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     private String type = "";
     private ImageView imgProduct;
     private RadioGroup rdTopping;
+    private RadioButton rdCheckYes;
     private int topping;
     private Button btnAdd, btnCancel;
     private Toolbar toolbar;
@@ -79,6 +80,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         lsBread = new ArrayList<Bread>();
         fruitDAO = new FruitDAO(this);
         lsFruit = new ArrayList<Fruit>();
+
+        rdCheckYes.setChecked(true);
 
         final List<String> arrayListType = new ArrayList<>();
         arrayListType.add("Trà Sữa");
@@ -113,9 +116,10 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                 String title = edtName.getText().toString().trim();
                 String price1 = edtPrice1.getText().toString().trim();
                 String price2 = edtPrice2.getText().toString().trim();
-//                topping = rdTopping.getCheckedRadioButtonId();
-//                RadioButton rdCheck = findViewById(topping);
-//                String Topping = rdCheck.getText().toString();
+
+                topping = rdTopping.getCheckedRadioButtonId();
+                RadioButton rdCheck = findViewById(topping);
+                String Topping = rdCheck.getText().toString();
 
                 try {
                     if (title.isEmpty() || price1.isEmpty() || price2.isEmpty()) {
@@ -132,7 +136,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                         milkTea.setImgMilk(getByteArrayFromImageView(imgProduct));
                         milkTea.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
                         milkTea.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                        milkTea.setTopping((String.valueOf(topping)));
+                        milkTea.setTopping(Topping);
                         milkTea.setType(type);
                         milkTeaDAO.Insert(milkTea);
                         Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -144,7 +148,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                         bread.setImgBread(getByteArrayFromImageView(imgProduct));
                         bread.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
                         bread.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                        bread.setTopping((String.valueOf(topping)));
+                        bread.setTopping(Topping);
                         bread.setType(type);
                         breadDAO.Insert(bread);
                         Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -156,7 +160,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                         fruit.setImgFruit(getByteArrayFromImageView(imgProduct));
                         fruit.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
                         fruit.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                        fruit.setTopping((String.valueOf(topping)));
+                        fruit.setTopping(Topping);
                         fruit.setType(type);
                         fruitDAO.Insert(fruit);
                         Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
@@ -273,6 +277,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         edtPrice2 = findViewById(R.id.edtPrice2);
         spType = findViewById(R.id.spnType);
         rdTopping = findViewById(R.id.rdTopping);
+        rdCheckYes = findViewById(R.id.rdPrice1);
         imgProduct = findViewById(R.id.imgProduct);
         btnAdd = findViewById(R.id.btnAddProduct);
         btnCancel = findViewById(R.id.btnCancelAdd);

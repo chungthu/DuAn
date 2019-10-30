@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.edu.poly.testduan2.MilkTeaProductDetailActivity;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.UpdateActivity;
 import vn.edu.poly.testduan2.adapter.MilkTeaAdapter;

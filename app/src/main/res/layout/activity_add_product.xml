@@ -174,11 +174,13 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rdPrice1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tvToppingYes" />
 
             <RadioButton
+                android:id="@+id/rdPrice2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
