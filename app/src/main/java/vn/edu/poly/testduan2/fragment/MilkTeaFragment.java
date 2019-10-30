@@ -59,23 +59,6 @@ public class MilkTeaFragment extends Fragment implements View.OnClickListener {
         lsMilkt.setAdapter(milkTeaAdapter);
         RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 3);
         lsMilkt.setLayoutManager(manager);
-
-//        lsMilkt.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getContext(), MilkTeaProductDetailActivity.class);
-//                intent.putExtra("ImageMilkTea", listMilkt.get(position).getImgMilk());
-//                startActivity(intent);
-//            }
-//        });
-//
-//        lsMilkt.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                position = i;
-//                return false;
-//            }
-//        });
         return view;
     }
 

@@ -113,55 +113,55 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                 String title = edtName.getText().toString().trim();
                 String price1 = edtPrice1.getText().toString().trim();
                 String price2 = edtPrice2.getText().toString().trim();
-                topping = rdTopping.getCheckedRadioButtonId();
-                RadioButton rdCheck = findViewById(topping);
-                String Topping = rdCheck.getText().toString();
+//                topping = rdTopping.getCheckedRadioButtonId();
+//                RadioButton rdCheck = findViewById(topping);
+//                String Topping = rdCheck.getText().toString();
 
                 try {
-//                    if (title.isEmpty() || price1.isEmpty() || price2.isEmpty()) {
-//                        if (title.isEmpty())
-//                            edtName.setError(getString(R.string.notify_empty_title_product));
-//                        if (price1.isEmpty())
-//                            edtPrice1.setError(getString(R.string.notify_empty_price1));
-//                        if (price2.isEmpty())
-//                            edtPrice2.setError(getString(R.string.notify_empty_price1));
-//                    }else {
-                        if (type.equals("Trà Sữa")) {
-                            MilkTea milkTea = new MilkTea();
-                            milkTea.setTitle(edtName.getText().toString());
-                            milkTea.setImgMilk(getByteArrayFromImageView(imgProduct));
-                            milkTea.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
-                            milkTea.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                            milkTea.setTopping(Topping);
-                            milkTea.setType(type);
-                            milkTeaDAO.Insert(milkTea);
-                            Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
-                            startActivity(intent);
-                        } else if (type.equals("Bánh Mỳ")) {
-                            Bread bread = new Bread();
-                            bread.setTitle(edtName.getText().toString());
-                            bread.setImgBread(getByteArrayFromImageView(imgProduct));
-                            bread.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
-                            bread.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                            bread.setTopping(Topping);
-                            bread.setType(type);
-                            breadDAO.Insert(bread);
-                            Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Fruit fruit = new Fruit();
-                            fruit.setTitle(edtName.getText().toString());
-                            fruit.setImgFruit(getByteArrayFromImageView(imgProduct));
-                            fruit.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
-                            fruit.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
-                            fruit.setTopping(Topping);
-                            fruit.setType(type);
-                            fruitDAO.Insert(fruit);
-                            Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
-                            startActivity(intent);
+                    if (title.isEmpty() || price1.isEmpty() || price2.isEmpty()) {
+                        if (title.isEmpty())
+                            edtName.setError(getString(R.string.notify_empty_title_product));
+                        if (price1.isEmpty())
+                            edtPrice1.setError(getString(R.string.notify_empty_price1));
+                        if (price2.isEmpty())
+                            edtPrice2.setError(getString(R.string.notify_empty_price1));
+                    }
+                    else if (type.equals("Trà Sữa")) {
+                        MilkTea milkTea = new MilkTea();
+                        milkTea.setTitle(edtName.getText().toString());
+                        milkTea.setImgMilk(getByteArrayFromImageView(imgProduct));
+                        milkTea.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
+                        milkTea.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
+                        milkTea.setTopping((String.valueOf(topping)));
+                        milkTea.setType(type);
+                        milkTeaDAO.Insert(milkTea);
+                        Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                    } else if (type.equals("Bánh Mỳ")) {
+                        Bread bread = new Bread();
+                        bread.setTitle(edtName.getText().toString());
+                        bread.setImgBread(getByteArrayFromImageView(imgProduct));
+                        bread.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
+                        bread.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
+                        bread.setTopping((String.valueOf(topping)));
+                        bread.setType(type);
+                        breadDAO.Insert(bread);
+                        Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Fruit fruit = new Fruit();
+                        fruit.setTitle(edtName.getText().toString());
+                        fruit.setImgFruit(getByteArrayFromImageView(imgProduct));
+                        fruit.setPrice1(Integer.parseInt(edtPrice1.getText().toString()));
+                        fruit.setPrice2(Integer.parseInt(edtPrice2.getText().toString()));
+                        fruit.setTopping((String.valueOf(topping)));
+                        fruit.setType(type);
+                        fruitDAO.Insert(fruit);
+                        Toast.makeText(AddProductActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(AddProductActivity.this, MenuActivity.class);
+                        startActivity(intent);
 //                        }
                     }
                 } catch (Exception e) {
