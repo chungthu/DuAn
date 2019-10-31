@@ -27,6 +27,7 @@ import android.view.Menu;
 import vn.edu.poly.testduan2.fragment.BreadFragment;
 import vn.edu.poly.testduan2.fragment.FruitFragment;
 import vn.edu.poly.testduan2.fragment.MilkTeaFragment;
+import vn.edu.poly.testduan2.view.activity.AddProductCHActivity;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,7 +98,7 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, AddProductActivity.class);
+            Intent intent = new Intent(this, AddProductCHActivity.class);
             startActivity(intent);
         }
 

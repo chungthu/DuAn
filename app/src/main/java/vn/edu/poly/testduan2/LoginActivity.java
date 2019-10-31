@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (pass.equals("")) {
             edtPass.setError(getString(R.string.error_emptypass));
         } else {
-            if (user.equals("admin") && pass.equals("adminMrCay123")) {
+            if (user.equals("admin") && pass.equals("12345678")) {
                 startActivity(new Intent(getApplicationContext(), MenuActivity.class));
             } else {
                 startActivity(new Intent(getApplicationContext(), Menu2Activity.class));

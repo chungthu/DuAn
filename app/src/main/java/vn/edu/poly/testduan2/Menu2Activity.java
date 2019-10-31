@@ -19,6 +19,7 @@ import android.widget.TextView;
 import vn.edu.poly.testduan2.fragment.BreadFragment;
 import vn.edu.poly.testduan2.fragment.FruitFragment;
 import vn.edu.poly.testduan2.fragment.MilkTeaFragment;
+import vn.edu.poly.testduan2.view.activity.AddProductCHActivity;
 
 public class Menu2Activity extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class Menu2Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_list) {
-            Intent intent = new Intent(this, AddProductActivity.class);
+            Intent intent = new Intent(this, AddProductCHActivity.class);
             startActivity(intent);
         }
         if (id == R.id.action_logout){
