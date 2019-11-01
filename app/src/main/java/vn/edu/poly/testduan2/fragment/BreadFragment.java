@@ -2,12 +2,10 @@ package vn.edu.poly.testduan2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,19 +18,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.adapter.BreadAdapter;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.controler.BreadAdapterCh;
+import vn.edu.poly.testduan2.controller.BreadAdapterCh;
 import vn.edu.poly.testduan2.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
-import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
-import vn.edu.poly.testduan2.model.Bread;
 import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.model.FruitFirebase;
-import vn.edu.poly.testduan2.sqliteDAO.BreadDAO;
 import vn.edu.poly.testduan2.view.activity.AddProductCHActivity;
 import vn.edu.poly.testduan2.view.activity.UpdateProductActivity;
 

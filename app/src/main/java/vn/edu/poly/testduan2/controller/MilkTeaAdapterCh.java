@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.controler;
+package vn.edu.poly.testduan2.controller;
 
 import android.content.Context;
 import android.view.ContextMenu;
@@ -33,16 +33,16 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_milk_tea,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_milk_tea, parent, false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         holder.tvMilk.setText(list.get(position).getName());
-        String image ;
-        image = list.get(position).getImage();
-        Picasso.get().load(image).into(holder.imgMilk);
+        if (list.get(position).getImage() != null && !list.get(position).getImage().equals("")){
+            Picasso.get().load(list.get(position).getImage()).into(holder.imgMilk);
+        }
 
         holder.cardMilk.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
 
     @Override
     public int getItemCount() {
-        if (list == null){
+        if (list == null) {
             return 0;
         }
         return list.size();
@@ -68,7 +68,6 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
     public void setPosition(int position) {
         this.position = position;
     }
-
 
 
     class Viewholder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {

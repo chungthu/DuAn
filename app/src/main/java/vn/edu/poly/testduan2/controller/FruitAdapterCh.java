@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.controler;
+package vn.edu.poly.testduan2.controller;
 
 import android.content.Context;
 import android.view.ContextMenu;
@@ -48,7 +48,9 @@ public class FruitAdapterCh extends RecyclerView.Adapter<FruitAdapterCh.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvFruit.setText(item.get(position).getName());
-        Picasso.get().load(item.get(position).getImage()).into(holder.imgFruit);
+        if (item.get(position).getImage() != null && !item.get(position).getImage().equals("")){
+            Picasso.get().load(item.get(position).getImage()).into(holder.imgFruit);
+        }
         holder.cardFruit.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

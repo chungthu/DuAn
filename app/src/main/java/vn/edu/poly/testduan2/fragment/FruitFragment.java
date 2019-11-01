@@ -20,7 +20,7 @@ import java.util.List;
 
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.controler.FruitAdapterCh;
+import vn.edu.poly.testduan2.controller.FruitAdapterCh;
 import vn.edu.poly.testduan2.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.model.FruitFirebase;
