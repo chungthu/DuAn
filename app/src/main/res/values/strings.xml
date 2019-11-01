@@ -58,4 +58,6 @@
     <string name="tvForgetPass">Quên mật khẩu ?</string>
     <string name="tvType">Loại:</string>
     <string name="tvname">Tên:</string>
+    <string name="Delete">Delete</string>
+    <string name="key_update">Update</string>
 </resources>

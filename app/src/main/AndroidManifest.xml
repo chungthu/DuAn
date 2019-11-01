@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.activity.AddProductCHActivity"/>
+        <activity android:name=".view.activity.UpdateProductActivity"></activity>
+        <activity android:name=".view.activity.AddProductCHActivity" />
         <activity android:name=".MilkTeaProductDetailActivity" />
         <activity android:name=".UpdateActivity" />
         <activity
@@ -45,8 +46,7 @@
         <activity
             android:name=".Menu2Activity"
             android:label="@string/title_activity_menu2"
-            android:theme="@style/AppTheme.NoActionBar" />
-<!--        <activity android:name=".image.ImagePickerActivity"/> &lt;!&ndash; uCrop cropping activity &ndash;&gt;-->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".image.ImagePickerActivity"/> &lt;!&ndash; uCrop cropping activity &ndash;&gt; -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

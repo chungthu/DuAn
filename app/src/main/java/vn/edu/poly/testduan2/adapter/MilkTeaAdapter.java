@@ -21,6 +21,7 @@ import java.util.List;
 
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.model.MilkTea;
+import vn.edu.poly.testduan2.model.MilkTeaFirebase;
 
 public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHolder> {
 
@@ -32,6 +33,9 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHold
         this.context = context;
         this.resource = resource;
         this.list = lsMilkt;
+    }
+
+    public MilkTeaAdapter(Context context, List<MilkTeaFirebase> item) {
     }
 
     @NonNull

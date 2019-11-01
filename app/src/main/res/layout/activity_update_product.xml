@@ -242,7 +242,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/btnAdd"
                 android:elevation="10dp"
-                android:text="@string/btnAdd"
+                android:text="@string/key_update"
                 android:textAllCaps="false"
                 android:textColor="@color/btnstAdd" />
 
@@ -254,7 +254,7 @@
                 android:layout_marginLeft="30dp"
                 android:background="@color/btnCancel"
                 android:elevation="10dp"
-                android:text="@string/btnCancel"
+                android:text="Cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/btnstCancel" />
         </LinearLayout>

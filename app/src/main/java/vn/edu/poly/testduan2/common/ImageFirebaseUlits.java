@@ -44,6 +44,7 @@ public class ImageFirebaseUlits {
     }
 
     private static String getExtension(Context context, Uri uri) {
+        assert uri != null;
         ContentResolver contentResolver = context.getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));

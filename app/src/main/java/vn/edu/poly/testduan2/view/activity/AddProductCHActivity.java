@@ -5,7 +5,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -15,24 +14,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.StorageTask;
-import com.google.firebase.storage.UploadTask;
-
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constacts;
 import vn.edu.poly.testduan2.common.ImageFirebaseUlits;
+import vn.edu.poly.testduan2.firebase.FirebaseManager;
 
 public class AddProductCHActivity extends BaseActivity {
 
@@ -70,9 +63,14 @@ public class AddProductCHActivity extends BaseActivity {
     Button btnAddProduct;
     @BindView(R.id.btnCancelAdd)
     Button btnCancelAdd;
-    private StorageReference mStorageReference;
+    @BindView(R.id.tv_category)
+    TextView tvCategory;
+    @BindView(R.id.edt_category)
+    EditText edtCategory;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     private Uri uriImage;
-    private StorageTask uploadTask;
+    private String image;
 
     @Override
     protected int getActivityLayoutId() {
@@ -81,7 +79,19 @@ public class AddProductCHActivity extends BaseActivity {
 
     @Override
     protected void initialize(Bundle savedInstanceState) {
-        mStorageReference = FirebaseStorage.getInstance().getReference("Images");
+        if (ConstactChange.STATUS_ADD == 1) {
+            tvTitle.setText("Add Milk Tea");
+        }
+        if (ConstactChange.STATUS_ADD == 2) {
+            tvTitle.setText("Add Fruit");
+            tvPrice2.setVisibility(View.GONE);
+            edtPrice2.setVisibility(View.GONE);
+        }
+        if (ConstactChange.STATUS_ADD == 3) {
+            tvTitle.setText("Add Bread");
+            tvPrice2.setVisibility(View.GONE);
+            edtPrice2.setVisibility(View.GONE);
+        }
     }
 
     private void filebasechooseImage() {
@@ -97,6 +107,7 @@ public class AddProductCHActivity extends BaseActivity {
         if (requestCode == Constacts.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImage = data.getData();
             imgProduct.setImageURI(uriImage);
+            image = ImageFirebaseUlits.fileUploader(this, uriImage);
         }
     }
 
@@ -113,15 +124,49 @@ public class AddProductCHActivity extends BaseActivity {
                 filebasechooseImage();
                 break;
             case R.id.btnAddProduct:
-                if (uploadTask != null && uploadTask.isInProgress()){
-                    Toast.makeText(this, "Upload in progress", Toast.LENGTH_SHORT).show();
-                }else {
-                    String s = ImageFirebaseUlits.fileUploader(this,uriImage);
-                    Log.e("AAA", s);
+                if (ConstactChange.STATUS_ADD == 1) {
+                    insertMilkTea();
                 }
-                break;
-            case R.id.btnCancelAdd:
-                break;
-        }
+                if (ConstactChange.STATUS_ADD == 2) {
+                    insertFruit();
+
+                }
+                if (ConstactChange.STATUS_ADD == 3) {
+                    insertBread();
+                }
+        break;
+        case R.id.btnCancelAdd:
+        finish();
+        break;
     }
+
+}
+
+
+    private void insertMilkTea() {
+        String nameproduct = edtName.getText().toString();
+        String idcategory = edtCategory.getText().toString();
+        String priceM = edtPrice1.getText().toString();
+        String priceL = edtPrice2.getText().toString();
+        String description = "";
+        FirebaseManager.insertMilkTea(this, nameproduct, "1", "ROYAL CHEESE", image, priceM, priceL, description);
+    }
+
+    private void insertFruit() {
+        String nameproduct = edtName.getText().toString();
+        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String priceM = edtPrice1.getText().toString();
+        String description = "";
+        FirebaseManager.insertFruit(this, nameproduct,image,priceM,description);
+    }
+
+    private void insertBread() {
+        String nameproduct = edtName.getText().toString();
+        String idcategory = edtCategory.getText().toString();
+        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String priceM = edtPrice1.getText().toString();
+        String description = "";
+        FirebaseManager.insertBread(this, nameproduct,image,priceM,description);
+    }
+
 }
