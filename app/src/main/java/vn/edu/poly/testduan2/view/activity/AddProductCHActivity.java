@@ -1,7 +1,9 @@
 package vn.edu.poly.testduan2.view.activity;
 
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -106,8 +108,8 @@ public class AddProductCHActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constacts.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImage = data.getData();
-            imgProduct.setImageURI(uriImage);
             image = ImageFirebaseUlits.fileUploader(this, uriImage);
+            imgProduct.setImageURI(uriImage);
         }
     }
 
@@ -129,11 +131,20 @@ public class AddProductCHActivity extends BaseActivity {
                 }
                 if (ConstactChange.STATUS_ADD == 2) {
                     insertFruit();
-
                 }
                 if (ConstactChange.STATUS_ADD == 3) {
                     insertBread();
                 }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Insert Success")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).create();
+                builder.show();
         break;
         case R.id.btnCancelAdd:
         finish();

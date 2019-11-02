@@ -1,5 +1,7 @@
 package vn.edu.poly.testduan2.view.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -103,6 +105,16 @@ public class UpdateProductActivity extends BaseActivity {
                 if (ConstactChange.STATUS_ADD == 3) {
                     updateBread();
                 }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Update Success")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).create();
+                builder.show();
                 break;
             case R.id.btnCancelAdd:
                 finish();
