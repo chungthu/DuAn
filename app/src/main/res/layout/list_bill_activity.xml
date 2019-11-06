@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ListBillActivity">
+    tools:context=".Namnn.ListBillActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

@@ -18,10 +18,10 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.activity.UpdateProductActivity"></activity>
         <activity android:name=".view.activity.AddProductCHActivity" />
-        <activity android:name=".MilkTeaProductDetailActivity" />
-        <activity android:name=".UpdateActivity" />
+        <activity android:name=".Namnn.MilkTeaProductDetailActivity" />
+        <activity android:name=".Namnn.UpdateActivity" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".Namnn.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,24 +29,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".image.ImagePickerActivity" />
+        <activity android:name=".Namnn.image.ImagePickerActivity" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".view.activity.MenuActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar2" />
         <activity
-            android:name=".ListBillActivity"
+            android:name=".Namnn.ListBillActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AddProductActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Menu2Activity"
-            android:label="@string/title_activity_menu2"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".image.ImagePickerActivity"/> &lt;!&ndash; uCrop cropping activity &ndash;&gt; -->
+        <!-- <activity android:name=".image.ImagePickerActivity"/> &lt;!&ndash; uCrop cropping activity &ndash;&gt; -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

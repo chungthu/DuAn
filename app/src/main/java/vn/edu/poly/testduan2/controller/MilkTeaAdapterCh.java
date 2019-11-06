@@ -30,6 +30,11 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
         this.list = list;
     }
 
+    public void update(List<MilkTeaFirebase> item){
+        this.list = item;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

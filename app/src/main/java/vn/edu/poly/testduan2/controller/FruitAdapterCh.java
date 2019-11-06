@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.model.FruitFirebase;
 
@@ -36,6 +35,11 @@ public class FruitAdapterCh extends RecyclerView.Adapter<FruitAdapterCh.ViewHold
     public FruitAdapterCh(Context context, List<FruitFirebase> item) {
         this.context = context;
         this.item = item;
+    }
+
+    public void update(List<FruitFirebase> item){
+        this.item = item;
+        notifyDataSetChanged();
     }
 
     @NonNull
