@@ -15,6 +15,7 @@ import vn.edu.poly.testduan2.controller.AllTableAdapter;
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class SetupTableFragment extends BaseFragment {
 
 
@@ -39,6 +40,8 @@ public class SetupTableFragment extends BaseFragment {
         setUpTabs();
     }
 
+
+    //setup taplayout and vp
     private void setUpTabs() {
         this.allTableAdapter = new AllTableAdapter(getFragmentManager(), getContext());
         this.vpTable.setAdapter(allTableAdapter);
