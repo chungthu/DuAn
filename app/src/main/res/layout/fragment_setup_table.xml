@@ -9,6 +9,8 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_contact"
+        android:background="@color/colorPrimaryDark"
+        app:tabTextColor="@android:color/background_light"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"/>
 

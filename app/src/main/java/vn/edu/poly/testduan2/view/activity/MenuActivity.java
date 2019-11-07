@@ -49,6 +49,11 @@ public class MenuActivity extends BaseActivity
 
     }
 
+    @Override
+    protected NavigationStyle getNavigationStyle() {
+        return NavigationStyle.None;
+    }
+
 
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {

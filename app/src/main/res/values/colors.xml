@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00bcd4</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#3E9345</color>
+    <color name="colorPrimaryDark">#307036</color>
+    <color name="colorAccent">#4EDC5A</color>
     <color name="welcome">#ffffff</color>
     <color name="btnlogin">#009688</color>
     <color name="btnloginText">#ffffff</color>
@@ -21,4 +21,5 @@
     <color name="btnstCancel">#ffffff</color>
     <color name="tvBill">#000000</color>
     <color name="tvPrice">#ff0000</color>
+    <color name="background">#ECECEC</color>
 </resources>

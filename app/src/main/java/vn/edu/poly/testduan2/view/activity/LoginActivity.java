@@ -9,11 +9,8 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.view.activity.BaseActivity;
-import vn.edu.poly.testduan2.view.activity.MenuActivity;
 
 public class LoginActivity extends BaseActivity {
 
@@ -62,5 +59,10 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(getApplicationContext(), MenuActivity.class));
             }
         }
+    }
+
+    @Override
+    protected NavigationStyle getNavigationStyle() {
+        return NavigationStyle.None;
     }
 }

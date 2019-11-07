@@ -36,6 +36,13 @@ public class BreadFragment extends BaseFragment {
     private List<BreadFirebase> list = new ArrayList<>();
 
 
+    public static BreadFragment newInstance() {
+        BreadFragment fragment = new BreadFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_bread;

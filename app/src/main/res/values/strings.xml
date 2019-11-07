@@ -66,4 +66,7 @@
     <string name="key_all_table">All Table</string>
     <string name="key_use_table">Used Table</string>
     <string name="empty_table">Empty Table</string>
+    <string name="key_buy_on">Buy on</string>
+    <string name="key_choose_food">Choose food</string>
+    <string name="key_all_product">All</string>
 </resources>

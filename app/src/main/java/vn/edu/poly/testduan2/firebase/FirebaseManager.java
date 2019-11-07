@@ -21,9 +21,9 @@ import vn.edu.poly.testduan2.model.FruitFirebase;
 import vn.edu.poly.testduan2.model.MilkTeaFirebase;
 
 public class FirebaseManager {
-    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("MilkTea");
-    static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Fruit");
-    static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Bread");
+    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
+    static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
+    static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
     private List<MilkTeaFirebase> item = new ArrayList<>();
     private List<FruitFirebase> itemFruit = new ArrayList<>();
     private List<BreadFirebase> itemBr = new ArrayList<>();

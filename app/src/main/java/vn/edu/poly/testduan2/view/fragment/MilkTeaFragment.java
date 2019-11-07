@@ -34,6 +34,14 @@ public class MilkTeaFragment extends BaseFragment {
     FirebaseManager firebaseManager = new FirebaseManager();
     private List<MilkTeaFirebase> list = new ArrayList<>();
 
+    public static MilkTeaFragment newInstance() {
+        MilkTeaFragment fragment = new MilkTeaFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_milk_tea;

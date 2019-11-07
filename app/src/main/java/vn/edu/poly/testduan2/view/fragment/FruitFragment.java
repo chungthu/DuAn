@@ -34,6 +34,12 @@ public class FruitFragment extends BaseFragment {
     FirebaseManager firebaseManager = new FirebaseManager();
     private List<FruitFirebase> list = new ArrayList<>();
 
+    public static FruitFragment newInstance() {
+        FruitFragment fragment = new FruitFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     protected int getLayoutId() {
