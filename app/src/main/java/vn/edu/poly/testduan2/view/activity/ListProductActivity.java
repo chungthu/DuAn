@@ -1,6 +1,7 @@
 package vn.edu.poly.testduan2.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.View;
@@ -92,7 +93,7 @@ public class ListProductActivity extends BaseActivity {
         this.tabProduct.setupWithViewPager(vpProduct);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe( sticky = true , threadMode = ThreadMode.MAIN_ORDERED)
     public void handleEvent(MessageEvent event) {
         switch (event.action) {
             case EvenUpdateAction.UPDATE_LIST_BILL_SIZE:
@@ -106,8 +107,12 @@ public class ListProductActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_reChoose:
+                ConstactChange.productList.clear();
                 break;
             case R.id.ll_finish:
+                if (ConstactChange.productList.size() > 0) {
+                    startActivity(new Intent(this, BillActivity.class));
+                }
                 break;
         }
     }

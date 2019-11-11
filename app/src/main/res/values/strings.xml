@@ -75,4 +75,6 @@
     <string name="key_amount">Amount</string>
     <string name="key_note">Note</string>
     <string name="key_total">Total</string>
+    <string name="key_Pay">Pay</string>
+    <string name="key_Notification">Notification</string>
 </resources>

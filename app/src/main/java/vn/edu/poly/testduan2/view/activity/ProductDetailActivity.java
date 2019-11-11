@@ -195,10 +195,7 @@ public class ProductDetailActivity extends BaseActivity {
         ConstactChange.productList.add(new Product(String.valueOf(ConstactChange.id_position), tvName.getText().toString(),
                 tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
         ConstactChange.id_position++;
-
-        EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
-
-        Log.e("Tag", ""+ConstactChange.productList.size());
+        EventBus.getDefault().postSticky(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
 
         finish();
     }
