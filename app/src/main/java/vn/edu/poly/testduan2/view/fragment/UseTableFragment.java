@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.view.activity.ProductActivity;
+import vn.edu.poly.testduan2.view.activity.ListProductActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +48,6 @@ public class UseTableFragment extends BaseFragment {
 
     @OnClick(R.id.cv_buyon)
     public void onViewClicked() {
-        startActivity(new Intent(getContext(), ProductActivity.class));
+        startActivity(new Intent(getContext(), ListProductActivity.class));
     }
 }

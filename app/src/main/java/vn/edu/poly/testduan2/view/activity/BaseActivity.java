@@ -135,8 +135,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         return Icon.createWithResource(this, R.drawable.ic_close_whith_24dp);
     }
 
+    @SuppressLint("NewApi")
     protected Icon getRightButtonIcon() {
-        return null;
+        return Icon.createWithResource(this, R.drawable.search);
     }
 
     //endregion

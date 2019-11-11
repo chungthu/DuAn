@@ -3,15 +3,16 @@ package vn.edu.poly.testduan2.view.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.android.material.tabs.TabLayout;
-
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
 import butterknife.BindView;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.controller.TabProdcutAdapter;
 
-public class ProductActivity extends BaseActivity {
+public class ListProductActivity extends BaseActivity {
 
 
     @BindView(R.id.tab_product)
@@ -22,7 +23,7 @@ public class ProductActivity extends BaseActivity {
 
     @Override
     protected int getActivityLayoutId() {
-        return R.layout.activity_product;
+        return R.layout.activity_list_product;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ProductActivity extends BaseActivity {
     }
 
     private void setUpTabs() {
-        this.adapter = new TabProdcutAdapter(getSupportFragmentManager(), ProductActivity.this);
+        this.adapter = new TabProdcutAdapter(getSupportFragmentManager(), ListProductActivity.this);
         this.vpProduct.setAdapter(adapter);
         this.tabProduct.setupWithViewPager(vpProduct);
     }

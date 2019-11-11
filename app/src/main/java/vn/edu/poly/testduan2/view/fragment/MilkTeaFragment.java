@@ -28,8 +28,6 @@ public class MilkTeaFragment extends BaseFragment {
 
     @BindView(R.id.lsMilk)
     RecyclerView lsMilk;
-    @BindView(R.id.fb_add1)
-    FloatingActionButton fbAdd1;
     private MilkTeaAdapterCh adapter;
     FirebaseManager firebaseManager = new FirebaseManager();
     private List<MilkTeaFirebase> list = new ArrayList<>();
@@ -56,7 +54,7 @@ public class MilkTeaFragment extends BaseFragment {
         firebaseManager.reaAllDataTea();
         registerForContextMenu(lsMilk);
         lsMilk.setHasFixedSize(true);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 3);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 1);
         lsMilk.setLayoutManager(manager);
 
         registerForContextMenu(lsMilk);
@@ -97,9 +95,9 @@ public class MilkTeaFragment extends BaseFragment {
         return super.onContextItemSelected(item);
     }
 
-    @OnClick(R.id.fb_add1)
-    public void onViewClicked() {
-        ConstactChange.STATUS_ADD = 1;
-        startActivity(new Intent(getContext(), AddProductCHActivity.class));
-    }
+//    @OnClick(R.id.fb_add1)
+//    public void onViewClicked() {
+//        ConstactChange.STATUS_ADD = 1;
+//        startActivity(new Intent(getContext(), AddProductCHActivity.class));
+//    }
 }

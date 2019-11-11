@@ -21,12 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constacts;
-import vn.edu.poly.testduan2.common.ImageFirebaseUlits;
+import vn.edu.poly.testduan2.common.ImageFirebaseUtils;
 import vn.edu.poly.testduan2.firebase.FirebaseManager;
 
 public class AddProductCHActivity extends BaseActivity {
@@ -108,7 +107,7 @@ public class AddProductCHActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constacts.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImage = data.getData();
-            image = ImageFirebaseUlits.fileUploader(this, uriImage);
+            image = ImageFirebaseUtils.fileUploader(this, uriImage);
             imgProduct.setImageURI(uriImage);
         }
     }
@@ -165,7 +164,7 @@ public class AddProductCHActivity extends BaseActivity {
 
     private void insertFruit() {
         String nameproduct = edtName.getText().toString();
-        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String image = ImageFirebaseUtils.fileUploader(this, uriImage);
         String priceM = edtPrice1.getText().toString();
         String description = "";
         FirebaseManager.insertFruit(this, nameproduct,image,priceM,description);
@@ -174,7 +173,7 @@ public class AddProductCHActivity extends BaseActivity {
     private void insertBread() {
         String nameproduct = edtName.getText().toString();
         String idcategory = edtCategory.getText().toString();
-        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String image = ImageFirebaseUtils.fileUploader(this, uriImage);
         String priceM = edtPrice1.getText().toString();
         String description = "";
         FirebaseManager.insertBread(this, nameproduct,image,priceM,description);

@@ -1,6 +1,7 @@
 package vn.edu.poly.testduan2.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.utils.EventBusAction;
+import vn.edu.poly.testduan2.common.utils.MessageEvent;
 import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.view.activity.ProductDetailActivity;
 
 public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.Viewholder> {
 
@@ -45,15 +53,32 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         holder.tvMilk.setText(list.get(position).getName());
+        holder.tvprice.setText(list.get(position).getPriceM());
         if (list.get(position).getImage() != null && !list.get(position).getImage().equals("")){
             Picasso.get().load(list.get(position).getImage()).into(holder.imgMilk);
         }
 
-        holder.cardMilk.setOnLongClickListener(new View.OnLongClickListener() {
+//        holder.cardMilk.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                setPosition(holder.getPosition());
+//                return false;
+//            }
+//        });
+
+        holder.cardMilk.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-                setPosition(holder.getPosition());
-                return false;
+            public void onClick(View view) {
+//                EventBus.getDefault().post(new MessageEvent(EventBusAction.MILKTEA_DETAIL,list.get(position)));
+                context.startActivity(new Intent(context, ProductDetailActivity.class));
+
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        EventBus.getDefault().post(new MessageEvent(EventBusAction.MILKTEA_DETAIL,list.get(position),position));
+                    }
+                },100);
             }
         });
     }
@@ -77,15 +102,17 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
 
     class Viewholder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
 
-        public CardView cardMilk;
-        public ImageView imgMilk;
-        public TextView tvMilk;
+        private CardView cardMilk;
+        private ImageView imgMilk;
+        private TextView tvMilk;
+        private TextView tvprice;
 
-        public Viewholder(@NonNull View itemView) {
+        private Viewholder(@NonNull View itemView) {
             super(itemView);
             cardMilk = itemView.findViewById(R.id.cardMilk);
             imgMilk = itemView.findViewById(R.id.imgMilk);
             tvMilk = itemView.findViewById(R.id.tvMilk);
+            tvprice = itemView.findViewById(R.id.tv_price);
             itemView.setOnCreateContextMenuListener(this);
         }
 

@@ -20,15 +20,13 @@ import androidx.appcompat.widget.Toolbar;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constacts;
-import vn.edu.poly.testduan2.common.ImageFirebaseUlits;
+import vn.edu.poly.testduan2.common.ImageFirebaseUtils;
 import vn.edu.poly.testduan2.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.model.Fruit;
 import vn.edu.poly.testduan2.model.FruitFirebase;
 import vn.edu.poly.testduan2.model.MilkTeaFirebase;
 
@@ -169,7 +167,7 @@ public class UpdateProductActivity extends BaseActivity {
         if (requestCode == Constacts.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImage = data.getData();
             imgProduct.setImageURI(uriImage);
-            image = ImageFirebaseUlits.fileUploader(this, uriImage);
+            image = ImageFirebaseUtils.fileUploader(this, uriImage);
         }
     }
 
@@ -192,7 +190,7 @@ public class UpdateProductActivity extends BaseActivity {
             image = ConstactChange.FRUIT.getImage();
         }
         String nameproduct = edtName.getText().toString();
-        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String image = ImageFirebaseUtils.fileUploader(this, uriImage);
         String price = edtPrice1.getText().toString();
         String description = "";
         FruitFirebase fruitFirebase = new FruitFirebase(ConstactChange.FRUIT.getId(), nameproduct, image, price, description);
@@ -204,7 +202,7 @@ public class UpdateProductActivity extends BaseActivity {
             image = ConstactChange.BREAD.getImage();
         }
         String nameproduct = edtName.getText().toString();
-        String image = ImageFirebaseUlits.fileUploader(this, uriImage);
+        String image = ImageFirebaseUtils.fileUploader(this, uriImage);
         String price = edtPrice1.getText().toString();
         String description = "";
         BreadFirebase breadFirebase = new BreadFirebase(ConstactChange.BREAD.getId(), nameproduct, image, price, description);

@@ -29,8 +29,6 @@ public class BreadFragment extends BaseFragment {
 
     @BindView(R.id.lsBread)
     RecyclerView lsBread;
-    @BindView(R.id.fb_add3)
-    FloatingActionButton fbAdd3;
     private BreadAdapterCh adapter;
     private FirebaseManager firebaseManager = new FirebaseManager();
     private List<BreadFirebase> list = new ArrayList<>();
@@ -98,9 +96,9 @@ public class BreadFragment extends BaseFragment {
         return super.onContextItemSelected(item);
     }
 
-    @OnClick(R.id.fb_add3)
-    public void onViewClicked() {
-        ConstactChange.STATUS_ADD = 3;
-        startActivity(new Intent(getActivity(), AddProductCHActivity.class));
-    }
+//    @OnClick(R.id.fb_add3)
+//    public void onViewClicked() {
+//        ConstactChange.STATUS_ADD = 3;
+//        startActivity(new Intent(getActivity(), AddProductCHActivity.class));
+//    }
 }

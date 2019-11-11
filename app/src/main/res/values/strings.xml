@@ -69,4 +69,10 @@
     <string name="key_buy_on">Buy on</string>
     <string name="key_choose_food">Choose food</string>
     <string name="key_all_product">All</string>
+    <string name="key_Reselect">Reselect</string>
+    <string name="key_xong">Accomplished</string>
+    <string name="key_price">Price</string>
+    <string name="key_amount">Amount</string>
+    <string name="key_note">Note</string>
+    <string name="key_total">Total</string>
 </resources>

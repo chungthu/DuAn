@@ -14,7 +14,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
-public class ImageFirebaseUlits {
+public class ImageFirebaseUtils {
     private static StorageReference mStorageReference = FirebaseStorage.getInstance().getReference("Images");
     private static String url_image = "";
 

@@ -28,8 +28,6 @@ public class FruitFragment extends BaseFragment {
 
     @BindView(R.id.lsFruit)
     RecyclerView lsFruit;
-    @BindView(R.id.fb_add2)
-    FloatingActionButton fbAdd2;
     private FruitAdapterCh adapter;
     FirebaseManager firebaseManager = new FirebaseManager();
     private List<FruitFirebase> list = new ArrayList<>();
@@ -96,9 +94,9 @@ public class FruitFragment extends BaseFragment {
         return super.onContextItemSelected(item);
     }
 
-    @OnClick(R.id.fb_add2)
-    public void onViewClicked() {
-        ConstactChange.STATUS_ADD = 2;
-        startActivity(new Intent(getContext(), AddProductCHActivity.class));
-    }
+//    @OnClick(R.id.fb_add2)
+//    public void onViewClicked() {
+//        ConstactChange.STATUS_ADD = 2;
+//        startActivity(new Intent(getContext(), AddProductCHActivity.class));
+//    }
 }
