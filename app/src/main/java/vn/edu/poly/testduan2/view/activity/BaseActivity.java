@@ -86,7 +86,9 @@ public abstract class BaseActivity extends AppCompatActivity {
             case Backable:
                 navLeftButton.setImageResource(R.drawable.ic_close_whith_24dp);
                 navLeftButton.setOnClickListener(v -> backButtonClicked(v));
-                navRightButton.setVisibility(View.GONE);
+                navRightButton.setVisibility(View.VISIBLE);
+                navRightButton.setOnClickListener(v -> rightButtonClicked(v));
+                navRightButton.setImageIcon(getRightButtonIcon());
                 navTitle.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
                 break;
             case Centered:
@@ -122,6 +124,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         return null;
     }
 
+
     protected void backButtonClicked(View v) {
         finish();
     }
@@ -135,9 +138,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         return Icon.createWithResource(this, R.drawable.ic_close_whith_24dp);
     }
 
-    @SuppressLint("NewApi")
     protected Icon getRightButtonIcon() {
-        return Icon.createWithResource(this, R.drawable.search);
+        return null;
     }
 
     //endregion

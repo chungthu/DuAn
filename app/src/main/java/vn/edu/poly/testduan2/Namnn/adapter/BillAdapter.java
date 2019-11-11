@@ -32,8 +32,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BillHolder holder, int position) {
-        holder.textView_bill.setText(lsbill.get(position).getBill());
-        holder.textView_price.setText(lsbill.get(position).getPrice());
+//        holder.textView_bill.setText(lsbill.get(position).getBill());
+//        holder.textView_price.setText(lsbill.get(position).getPrice());
     }
 
     @Override

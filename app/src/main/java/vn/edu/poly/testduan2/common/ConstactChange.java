@@ -1,8 +1,12 @@
 package vn.edu.poly.testduan2.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vn.edu.poly.testduan2.model.BreadFirebase;
 import vn.edu.poly.testduan2.model.FruitFirebase;
 import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.model.Product;
 
 public class ConstactChange {
 
@@ -10,5 +14,7 @@ public class ConstactChange {
     public static MilkTeaFirebase MILKTEA;
     public static FruitFirebase FRUIT;
     public static BreadFirebase BREAD;
+    public static List<Product> productList = new ArrayList<>();
+    public static int id_position = 1;
 
 }

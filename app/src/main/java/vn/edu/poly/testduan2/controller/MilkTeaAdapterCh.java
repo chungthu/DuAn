@@ -38,7 +38,7 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
         this.list = list;
     }
 
-    public void update(List<MilkTeaFirebase> item){
+    public void update(List<MilkTeaFirebase> item) {
         this.list = item;
         notifyDataSetChanged();
     }
@@ -54,7 +54,7 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         holder.tvMilk.setText(list.get(position).getName());
         holder.tvprice.setText(list.get(position).getPriceM());
-        if (list.get(position).getImage() != null && !list.get(position).getImage().equals("")){
+        if (list.get(position).getImage() != null && !list.get(position).getImage().equals("")) {
             Picasso.get().load(list.get(position).getImage()).into(holder.imgMilk);
         }
 
@@ -72,13 +72,8 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
 //                EventBus.getDefault().post(new MessageEvent(EventBusAction.MILKTEA_DETAIL,list.get(position)));
                 context.startActivity(new Intent(context, ProductDetailActivity.class));
 
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        EventBus.getDefault().post(new MessageEvent(EventBusAction.MILKTEA_DETAIL,list.get(position),position));
-                    }
-                },100);
+                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.MILKTEA_DETAIL, list.get(position), position));
+
             }
         });
     }

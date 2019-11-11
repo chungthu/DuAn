@@ -41,9 +41,9 @@ public class ListBillActivity extends AppCompatActivity implements View.OnClickL
 
         list = new ArrayList<>();
 
-        for (int i = 1; i < 40; i++) {
-            list.add(new Bill("Hóa đơn " + i,"","","100.000 đ"));
-        }
+//        for (int i = 1; i < 40; i++) {
+//            list.add(new Bill("Hóa đơn " + i,"","","100.000 đ"));
+//        }
 
         billAdapter = new BillAdapter(list);
         recyclerView.setAdapter(billAdapter);

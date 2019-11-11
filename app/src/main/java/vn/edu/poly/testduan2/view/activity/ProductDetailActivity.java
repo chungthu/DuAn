@@ -1,8 +1,11 @@
 package vn.edu.poly.testduan2.view.activity;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,11 +24,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.utils.EvenUpdate;
+import vn.edu.poly.testduan2.common.utils.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.utils.EventBusAction;
 import vn.edu.poly.testduan2.common.utils.MessageEvent;
 import vn.edu.poly.testduan2.model.BreadFirebase;
 import vn.edu.poly.testduan2.model.FruitFirebase;
 import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.model.Product;
 
 public class ProductDetailActivity extends BaseActivity {
 
@@ -64,7 +71,19 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     protected String getNavigationTitle() {
-        return "SP "+title;
+        return "SP " + title;
+    }
+
+
+    @SuppressLint("NewApi")
+    @Override
+    protected Icon getRightButtonIcon() {
+        return Icon.createWithResource(this, R.drawable.ic_done_black_24dp);
+    }
+
+    @Override
+    protected void rightButtonClicked(View v) {
+        addBill();
     }
 
     @Override
@@ -81,37 +100,38 @@ public class ProductDetailActivity extends BaseActivity {
             EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
     public void handleEvent(MessageEvent event) {
         switch (event.action) {
             case EventBusAction.MILKTEA_DETAIL:
-                title = String.valueOf(event.position);
+                title = String.valueOf(event.position + 1);
                 milkTea = (MilkTeaFirebase) event.object;
                 setUpMilkTea(milkTea);
                 break;
             case EventBusAction.FRUIT_DETAIL:
-                title = String.valueOf(event.position);
+                title = String.valueOf(event.position + 1);
                 fruit = (FruitFirebase) event.object;
                 setUpFruit(fruit);
                 break;
             case EventBusAction.BREAD_DETAIL:
-                title = String.valueOf(event.position);
+                title = String.valueOf(event.position + 1);
                 bread = (BreadFirebase) event.object;
                 setUpBread(bread);
                 break;
         }
+        updateNavigationBar();
     }
 
     @OnClick({R.id.img_remove, R.id.img_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_remove:
-                if (Double.parseDouble(tvAmount.getText().toString())>1){
-                    tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString())-1));
+                if (Double.parseDouble(tvAmount.getText().toString()) > 1) {
+                    tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString()) - 1));
                 }
                 break;
             case R.id.img_add:
-                tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString())+1));
+                tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString()) + 1));
                 break;
         }
     }
@@ -158,6 +178,7 @@ public class ProductDetailActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                tvPrice.getText().toString();
                 total.setText(String.valueOf(Double.parseDouble(tvPrice.getText().toString()) *
                         Double.parseDouble(tvAmount.getText().toString())));
             }
@@ -168,4 +189,18 @@ public class ProductDetailActivity extends BaseActivity {
             }
         });
     }
+
+    private void addBill() {
+
+        ConstactChange.productList.add(new Product(String.valueOf(ConstactChange.id_position), tvName.getText().toString(),
+                tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
+        ConstactChange.id_position++;
+
+        EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
+
+        Log.e("Tag", ""+ConstactChange.productList.size());
+
+        finish();
+    }
+
 }

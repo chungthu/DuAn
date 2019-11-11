@@ -1,27 +1,72 @@
 package vn.edu.poly.testduan2.model;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.List;
+
+@IgnoreExtraProperties
 public class Bill {
-    private String bill;
-    private String price;
+    String ID;
+    List<Product> products;
+    long time;
+    String responsible;
+    String total;
 
-    public Bill(String bill, String kind, String size, String price) {
-        this.bill = bill;
-        this.price = price;
+    public Bill() {
     }
 
-    public String getBill() {
-        return bill;
+    public Bill(List<Product> products, long time, String responsible, String total) {
+        this.products = products;
+        this.time = time;
+        this.responsible = responsible;
+        this.total = total;
     }
 
-    public void setBill(String bill) {
-        this.bill = bill;
+    public Bill(String ID, List<Product> products, long time, String responsible, String total) {
+        this.ID = ID;
+        this.products = products;
+        this.time = time;
+        this.responsible = responsible;
+        this.total = total;
     }
 
-    public String getPrice() {
-        return price;
+    public String getID() {
+        return ID;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public String getResponsible() {
+        return responsible;
+    }
+
+    public void setResponsible(String responsible) {
+        this.responsible = responsible;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 }

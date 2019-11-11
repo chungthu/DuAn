@@ -44,6 +44,7 @@ public class SetupTableFragment extends BaseFragment {
     //setup taplayout and vp
     private void setUpTabs() {
         this.allTableAdapter = new AllTableAdapter(getFragmentManager(), getContext());
+        this.vpTable.setOffscreenPageLimit(2);
         this.vpTable.setAdapter(allTableAdapter);
         this.tabContact.setupWithViewPager(vpTable);
     }
