@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.utils.EvenUpdate;
 import vn.edu.poly.testduan2.common.utils.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.utils.MessageEvent;
 import vn.edu.poly.testduan2.controller.TabProdcutAdapter;
@@ -51,6 +52,7 @@ public class ListProductActivity extends BaseActivity {
         setUpTabs();
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
@@ -59,8 +61,8 @@ public class ListProductActivity extends BaseActivity {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
     }
@@ -93,12 +95,11 @@ public class ListProductActivity extends BaseActivity {
         this.tabProduct.setupWithViewPager(vpProduct);
     }
 
-    @Subscribe( sticky = true , threadMode = ThreadMode.MAIN_ORDERED)
-    public void handleEvent(MessageEvent event) {
+    @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
+    public void handleEvent(EvenUpdate event) {
         switch (event.action) {
             case EvenUpdateAction.UPDATE_LIST_BILL_SIZE:
                 tvAmount.setText(String.valueOf(ConstactChange.productList.size()));
-                Toast.makeText(this, "Chung", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -107,7 +108,9 @@ public class ListProductActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_reChoose:
+                tvAmount.setText(String.valueOf(0));
                 ConstactChange.productList.clear();
+
                 break;
             case R.id.ll_finish:
                 if (ConstactChange.productList.size() > 0) {

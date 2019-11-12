@@ -127,11 +127,11 @@ public class ProductDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.img_remove:
                 if (Double.parseDouble(tvAmount.getText().toString()) > 1) {
-                    tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString()) - 1));
+                    tvAmount.setText(String.valueOf(Integer.parseInt(tvAmount.getText().toString()) - 1));
                 }
                 break;
             case R.id.img_add:
-                tvAmount.setText(String.valueOf(Double.parseDouble(tvAmount.getText().toString()) + 1));
+                tvAmount.setText(String.valueOf(Integer.parseInt(tvAmount.getText().toString()) + 1));
                 break;
         }
     }
@@ -143,8 +143,8 @@ public class ProductDetailActivity extends BaseActivity {
         tvName.setText(item.getName());
         tvPriceTitle.setText(item.getPriceM());
         tvPrice.setText(item.getPriceM());
-        total.setText(String.valueOf(Double.parseDouble(tvPrice.getText().toString()) *
-                Double.parseDouble(tvAmount.getText().toString())));
+        total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
+                Integer.parseInt(tvAmount.getText().toString())));
     }
 
     private void setUpFruit(FruitFirebase item) {
@@ -154,8 +154,8 @@ public class ProductDetailActivity extends BaseActivity {
         tvName.setText(item.getName());
         tvPriceTitle.setText(item.getPrice());
         tvPrice.setText(item.getPrice());
-        total.setText(String.valueOf(Double.parseDouble(tvPrice.getText().toString()) *
-                Double.parseDouble(tvAmount.getText().toString())));
+        total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
+                Integer.parseInt(tvAmount.getText().toString())));
     }
 
     private void setUpBread(BreadFirebase item) {
@@ -165,8 +165,8 @@ public class ProductDetailActivity extends BaseActivity {
         tvName.setText(item.getName());
         tvPriceTitle.setText(item.getPrice());
         tvPrice.setText(item.getPrice());
-        total.setText(String.valueOf(Double.parseDouble(tvPrice.getText().toString()) *
-                Double.parseDouble(tvAmount.getText().toString())));
+        total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
+                Integer.parseInt(tvAmount.getText().toString())));
     }
 
     private void setupTotal() {
@@ -179,8 +179,8 @@ public class ProductDetailActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 tvPrice.getText().toString();
-                total.setText(String.valueOf(Double.parseDouble(tvPrice.getText().toString()) *
-                        Double.parseDouble(tvAmount.getText().toString())));
+                total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
+                        Integer.parseInt(tvAmount.getText().toString())));
             }
 
             @Override
@@ -195,7 +195,7 @@ public class ProductDetailActivity extends BaseActivity {
         ConstactChange.productList.add(new Product(String.valueOf(ConstactChange.id_position), tvName.getText().toString(),
                 tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
         ConstactChange.id_position++;
-        EventBus.getDefault().postSticky(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
+        EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
 
         finish();
     }

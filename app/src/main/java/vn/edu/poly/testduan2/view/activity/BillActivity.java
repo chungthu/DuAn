@@ -40,7 +40,7 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected void initialize(@Nullable Bundle savedInstanceState) {
-
+        setUp();
     }
 
     @SuppressLint("NewApi")
@@ -67,10 +67,9 @@ public class BillActivity extends BaseActivity {
     }
 
     private void setUp(){
-
         adapter = new BillAdapter(this, ConstactChange.productList);
         rvItemBill.setLayoutManager(new LinearLayoutManager(this));
         rvItemBill.setHasFixedSize(true);
-
+        rvItemBill.setAdapter(adapter);
     }
 }
