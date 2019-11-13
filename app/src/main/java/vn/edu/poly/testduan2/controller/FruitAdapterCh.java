@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.model.FruitFirebase;
+import vn.edu.poly.testduan2.net.response.FruitFirebase;
 
 public class FruitAdapterCh extends RecyclerView.Adapter<FruitAdapterCh.ViewHolder> {
 

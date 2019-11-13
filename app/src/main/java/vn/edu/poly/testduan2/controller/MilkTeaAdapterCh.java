@@ -18,13 +18,11 @@ import com.squareup.picasso.Picasso;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.common.utils.EventBusAction;
-import vn.edu.poly.testduan2.common.utils.MessageEvent;
-import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
+import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 import vn.edu.poly.testduan2.view.activity.ProductDetailActivity;
 
 public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.Viewholder> {

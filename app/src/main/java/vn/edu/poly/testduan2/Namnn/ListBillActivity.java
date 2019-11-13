@@ -18,7 +18,7 @@ import java.util.List;
 
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.Namnn.adapter.BillAdapter;
-import vn.edu.poly.testduan2.model.Bill;
+import vn.edu.poly.testduan2.net.response.Bill;
 
 public class ListBillActivity extends AppCompatActivity implements View.OnClickListener {
 

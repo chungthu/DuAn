@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.model;
+package vn.edu.poly.testduan2.net.response;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -8,19 +8,21 @@ import java.util.List;
 public class Bill {
     String ID;
     List<Product> products;
-    long time;
+    String time;
     String responsible;
     String total;
+    boolean status_pay = false;
 
     public Bill() {
     }
 
-    public Bill(String ID, List<Product> products, long time, String responsible, String total) {
+    public Bill(String ID, List<Product> products, String time, String responsible, String total, boolean status_pay) {
         this.ID = ID;
         this.products = products;
         this.time = time;
         this.responsible = responsible;
         this.total = total;
+        this.status_pay = status_pay;
     }
 
     public String getID() {
@@ -39,11 +41,11 @@ public class Bill {
         this.products = products;
     }
 
-    public long getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(long time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -61,5 +63,13 @@ public class Bill {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public boolean isStatus_pay() {
+        return status_pay;
+    }
+
+    public void setStatus_pay(boolean status_pay) {
+        this.status_pay = status_pay;
     }
 }

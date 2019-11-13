@@ -26,7 +26,7 @@ import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constacts;
 import vn.edu.poly.testduan2.common.ImageFirebaseUtils;
-import vn.edu.poly.testduan2.firebase.FirebaseManager;
+import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 
 public class AddProductCHActivity extends BaseActivity {
 

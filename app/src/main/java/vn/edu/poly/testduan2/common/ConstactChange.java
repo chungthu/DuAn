@@ -3,10 +3,10 @@ package vn.edu.poly.testduan2.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.model.FruitFirebase;
-import vn.edu.poly.testduan2.model.MilkTeaFirebase;
-import vn.edu.poly.testduan2.model.Product;
+import vn.edu.poly.testduan2.net.response.BreadFirebase;
+import vn.edu.poly.testduan2.net.response.FruitFirebase;
+import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
+import vn.edu.poly.testduan2.net.response.Product;
 
 public class ConstactChange {
 

@@ -1,7 +1,6 @@
-package vn.edu.poly.testduan2.firebase;
+package vn.edu.poly.testduan2.net.firebase;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,14 +15,16 @@ import androidx.annotation.NonNull;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
-import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.model.FruitFirebase;
-import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.net.response.Bill;
+import vn.edu.poly.testduan2.net.response.BreadFirebase;
+import vn.edu.poly.testduan2.net.response.FruitFirebase;
+import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 
 public class FirebaseManager {
     static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
     static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
     static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
+    public static DatabaseReference mDatabaseBill = FirebaseDatabase.getInstance().getReference("Bill");
     private List<MilkTeaFirebase> item = new ArrayList<>();
     private List<FruitFirebase> itemFruit = new ArrayList<>();
     private List<BreadFirebase> itemBr = new ArrayList<>();
@@ -182,6 +183,15 @@ public class FirebaseManager {
         });
     }
 
+
+    /**
+     Table Bread
+     **/
+
+    //Insert
+    public static void insertBill(Bill bill){
+        mDatabaseBill.child(bill.getID()).setValue(bill);
+    }
 
 }
 

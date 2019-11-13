@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.model.Bill;
+import vn.edu.poly.testduan2.net.response.Bill;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
 

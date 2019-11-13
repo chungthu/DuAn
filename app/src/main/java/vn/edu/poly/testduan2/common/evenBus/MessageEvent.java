@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.common.utils;
+package vn.edu.poly.testduan2.common.evenBus;
 
 
 public class MessageEvent {

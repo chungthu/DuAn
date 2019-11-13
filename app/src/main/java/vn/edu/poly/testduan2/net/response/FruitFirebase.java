@@ -1,24 +1,25 @@
-package vn.edu.poly.testduan2.model;
+package vn.edu.poly.testduan2.net.response;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class Product {
+public class FruitFirebase {
 
     String id;
     String name;
     String image;
-    String amount;
     String price;
-    String total;
+    String description;
 
-    public Product(String id, String name, String image, String amount, String price, String total) {
+    public FruitFirebase(String id, String name, String image, String price, String description) {
         this.id = id;
         this.name = name;
         this.image = image;
-        this.amount = amount;
         this.price = price;
-        this.total = total;
+        this.description = description;
+    }
+
+    public FruitFirebase() {
     }
 
     public String getId() {
@@ -45,14 +46,6 @@ public class Product {
         this.image = image;
     }
 
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
     public String getPrice() {
         return price;
     }
@@ -61,11 +54,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getTotal() {
-        return total;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

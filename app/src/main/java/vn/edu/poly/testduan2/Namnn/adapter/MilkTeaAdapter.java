@@ -16,7 +16,7 @@ import java.util.List;
 
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.model.MilkTea;
-import vn.edu.poly.testduan2.model.MilkTeaFirebase;
+import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 
 public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHolder> {
 

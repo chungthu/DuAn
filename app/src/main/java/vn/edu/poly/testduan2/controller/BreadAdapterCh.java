@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.model.BreadFirebase;
+import vn.edu.poly.testduan2.net.response.BreadFirebase;
 
 public class BreadAdapterCh extends RecyclerView.Adapter<BreadAdapterCh.ViewHolder> {
 

@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.model;
+package vn.edu.poly.testduan2.net.response;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 

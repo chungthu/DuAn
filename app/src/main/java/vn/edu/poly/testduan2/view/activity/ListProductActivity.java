@@ -17,15 +17,21 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
+import java.util.Calendar;
+import java.util.Date;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.common.utils.EvenUpdate;
-import vn.edu.poly.testduan2.common.utils.EvenUpdateAction;
-import vn.edu.poly.testduan2.common.utils.MessageEvent;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
+import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
 import vn.edu.poly.testduan2.controller.TabProdcutAdapter;
+import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
+import vn.edu.poly.testduan2.net.response.Bill;
 
 public class ListProductActivity extends BaseActivity {
 
@@ -93,6 +99,10 @@ public class ListProductActivity extends BaseActivity {
         this.vpProduct.setOffscreenPageLimit(3);
         this.vpProduct.setAdapter(adapter);
         this.tabProduct.setupWithViewPager(vpProduct);
+        if (ConstactChange.productList != null){
+            tvAmount.setText(String.valueOf(ConstactChange.productList.size()));
+        }
+        tvAmount.setText(String.valueOf(ConstactChange.productList.size()));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
@@ -110,13 +120,28 @@ public class ListProductActivity extends BaseActivity {
             case R.id.ll_reChoose:
                 tvAmount.setText(String.valueOf(0));
                 ConstactChange.productList.clear();
-
                 break;
             case R.id.ll_finish:
-                if (ConstactChange.productList.size() > 0) {
-                    startActivity(new Intent(this, BillActivity.class));
-                }
+                addBill();
                 break;
         }
     }
+
+    private void addBill(){
+        if (ConstactChange.productList.size() > 0) {
+            startActivity(new Intent(this, BillActivity.class));
+            String key = FirebaseManager.mDatabaseBill.push().getKey();
+            Date currentTime = Calendar.getInstance().getTime();
+            int total = 0;
+            for (int i = 0; i < ConstactChange.productList.size(); i++) {
+                total = total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
+            }
+            String totals = String.valueOf(total);
+            Bill bill = new Bill(key, ConstactChange.productList, String.valueOf(currentTime),"Nguyen Thanh CHung",totals,false);
+            EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL,bill,0));
+        }else {
+            Toast.makeText(this, "Bạn cần chọn ít nhất 1 sản phẩm!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

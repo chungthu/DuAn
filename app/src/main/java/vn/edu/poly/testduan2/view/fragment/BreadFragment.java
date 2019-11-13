@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.controller.BreadAdapterCh;
-import vn.edu.poly.testduan2.firebase.FirebaseManager;
+import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
-import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.view.activity.AddProductCHActivity;
+import vn.edu.poly.testduan2.net.response.BreadFirebase;
 import vn.edu.poly.testduan2.view.activity.UpdateProductActivity;
 
 public class BreadFragment extends BaseFragment {

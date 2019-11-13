@@ -1,9 +1,9 @@
-package vn.edu.poly.testduan2.model;
+package vn.edu.poly.testduan2.net.response;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class FruitFirebase {
+public class BreadFirebase {
 
     String id;
     String name;
@@ -11,7 +11,7 @@ public class FruitFirebase {
     String price;
     String description;
 
-    public FruitFirebase(String id, String name, String image, String price, String description) {
+    public BreadFirebase(String id, String name, String image, String price, String description) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -19,7 +19,7 @@ public class FruitFirebase {
         this.description = description;
     }
 
-    public FruitFirebase() {
+    public BreadFirebase() {
     }
 
     public String getId() {

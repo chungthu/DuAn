@@ -5,12 +5,10 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,18 +19,17 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.common.utils.EvenUpdate;
-import vn.edu.poly.testduan2.common.utils.EvenUpdateAction;
-import vn.edu.poly.testduan2.common.utils.EventBusAction;
-import vn.edu.poly.testduan2.common.utils.MessageEvent;
-import vn.edu.poly.testduan2.model.BreadFirebase;
-import vn.edu.poly.testduan2.model.FruitFirebase;
-import vn.edu.poly.testduan2.model.MilkTeaFirebase;
-import vn.edu.poly.testduan2.model.Product;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
+import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.net.response.BreadFirebase;
+import vn.edu.poly.testduan2.net.response.FruitFirebase;
+import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
+import vn.edu.poly.testduan2.net.response.Product;
 
 public class ProductDetailActivity extends BaseActivity {
 
