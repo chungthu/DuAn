@@ -71,5 +71,7 @@ public class BillActivity extends BaseActivity {
         rvItemBill.setLayoutManager(new LinearLayoutManager(this));
         rvItemBill.setHasFixedSize(true);
         rvItemBill.setAdapter(adapter);
+
+
     }
 }

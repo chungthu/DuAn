@@ -15,13 +15,6 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(List<Product> products, long time, String responsible, String total) {
-        this.products = products;
-        this.time = time;
-        this.responsible = responsible;
-        this.total = total;
-    }
-
     public Bill(String ID, List<Product> products, long time, String responsible, String total) {
         this.ID = ID;
         this.products = products;

@@ -58,6 +58,7 @@ public class ProductDetailActivity extends BaseActivity {
     private FruitFirebase fruit;
     private BreadFirebase bread;
     private String title;
+    private String images;
 
     @Override
     protected int getActivityLayoutId() {
@@ -145,6 +146,7 @@ public class ProductDetailActivity extends BaseActivity {
         tvPrice.setText(item.getPriceM());
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
+        images = item.getImage();
     }
 
     private void setUpFruit(FruitFirebase item) {
@@ -156,6 +158,7 @@ public class ProductDetailActivity extends BaseActivity {
         tvPrice.setText(item.getPrice());
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
+        images = item.getImage();
     }
 
     private void setUpBread(BreadFirebase item) {
@@ -167,6 +170,7 @@ public class ProductDetailActivity extends BaseActivity {
         tvPrice.setText(item.getPrice());
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
+        images = item.getImage();
     }
 
     private void setupTotal() {
@@ -191,9 +195,8 @@ public class ProductDetailActivity extends BaseActivity {
     }
 
     private void addBill() {
-
         ConstactChange.productList.add(new Product(String.valueOf(ConstactChange.id_position), tvName.getText().toString(),
-                tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
+                images,tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
         ConstactChange.id_position++;
         EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
 
