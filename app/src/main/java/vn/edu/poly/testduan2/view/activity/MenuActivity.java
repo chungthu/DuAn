@@ -17,12 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
-
-import vn.edu.poly.testduan2.Namnn.ListBillActivity;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.view.fragment.AllTableFragment;
-import vn.edu.poly.testduan2.view.fragment.MilkTeaFragment;
 import vn.edu.poly.testduan2.view.fragment.SetupTableFragment;
 
 public class MenuActivity extends BaseActivity
@@ -115,7 +110,7 @@ public class MenuActivity extends BaseActivity
         if (id == R.id.nav_information) {
             // Handle the camera action
         } else if (id == R.id.nav_history) {
-            Intent intent = new Intent(this, ListBillActivity.class);
+            Intent intent = new Intent(this, BillActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_money) {
 

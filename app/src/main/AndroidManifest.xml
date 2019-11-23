@@ -24,7 +24,7 @@
         <activity android:name=".Namnn.MilkTeaProductDetailActivity" />
         <activity android:name=".Namnn.UpdateActivity" />
         <activity
-            android:name=".Namnn.WelcomeActivity"
+            android:name=".view.activity.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +41,7 @@
             android:name=".view.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar2" />
         <activity
-            android:name=".Namnn.ListBillActivity"
+            android:name=".view.activity.BillActivity$ListBillActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- <activity android:name=".image.ImagePickerActivity"/> &lt;!&ndash; uCrop cropping activity &ndash;&gt; -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"

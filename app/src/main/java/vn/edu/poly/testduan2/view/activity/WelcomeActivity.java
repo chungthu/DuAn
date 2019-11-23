@@ -1,4 +1,4 @@
-package vn.edu.poly.testduan2.Namnn;
+package vn.edu.poly.testduan2.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.view.activity.LoginActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
