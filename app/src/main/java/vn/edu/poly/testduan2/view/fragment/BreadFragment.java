@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.controller.BreadAdapterCh;
+import vn.edu.poly.testduan2.controller.BreadAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
@@ -25,7 +25,7 @@ public class BreadFragment extends BaseFragment {
 
     @BindView(R.id.lsBread)
     RecyclerView lsBread;
-    private BreadAdapterCh adapter;
+    private BreadAdapter adapter;
     private FirebaseManager firebaseManager = new FirebaseManager();
     private List<BreadFirebase> list = new ArrayList<>();
 
@@ -50,7 +50,7 @@ public class BreadFragment extends BaseFragment {
 
     private void setupData() {
         firebaseManager.readAllBread();
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 3);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(getContext(), 1);
         lsBread.setLayoutManager(manager);
         lsBread.setHasFixedSize(true);
         registerForContextMenu(lsBread);
@@ -60,7 +60,7 @@ public class BreadFragment extends BaseFragment {
             public void getData(List<BreadFirebase> item) {
                 list = item;
                 if (adapter == null) {
-                    adapter = new BreadAdapterCh(getContext(), item);
+                    adapter = new BreadAdapter(getContext(), item);
                     lsBread.setAdapter(adapter);
                 }else {
                     adapter.update(item);

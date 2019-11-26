@@ -25,13 +25,13 @@ import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 import vn.edu.poly.testduan2.view.activity.ProductDetailActivity;
 
-public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.Viewholder> {
+public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.Viewholder> {
 
     Context context;
     List<MilkTeaFirebase> list;
     private int position;
 
-    public MilkTeaAdapterCh(Context context, List<MilkTeaFirebase> list) {
+    public MilkTeaAdapter(Context context, List<MilkTeaFirebase> list) {
         this.context = context;
         this.list = list;
     }
@@ -44,7 +44,7 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_milk_tea, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false);
         return new Viewholder(view);
     }
 
@@ -56,20 +56,10 @@ public class MilkTeaAdapterCh extends RecyclerView.Adapter<MilkTeaAdapterCh.View
             Picasso.get().load(list.get(position).getImage()).into(holder.imgMilk);
         }
 
-//        holder.cardMilk.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                setPosition(holder.getPosition());
-//                return false;
-//            }
-//        });
-
         holder.cardMilk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                EventBus.getDefault().post(new MessageEvent(EventBusAction.MILKTEA_DETAIL,list.get(position)));
                 context.startActivity(new Intent(context, ProductDetailActivity.class));
-
                 EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.MILKTEA_DETAIL, list.get(position), position));
 
             }

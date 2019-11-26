@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.controller.MilkTeaAdapterCh;
+import vn.edu.poly.testduan2.controller.MilkTeaAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
@@ -24,7 +24,7 @@ public class MilkTeaFragment extends BaseFragment {
 
     @BindView(R.id.lsMilk)
     RecyclerView lsMilk;
-    private MilkTeaAdapterCh adapter;
+    private MilkTeaAdapter adapter;
     FirebaseManager firebaseManager = new FirebaseManager();
     private List<MilkTeaFirebase> list = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class MilkTeaFragment extends BaseFragment {
             public void getData(List<MilkTeaFirebase> item) {
                 list = item;
                 if (adapter == null) {
-                    adapter = new MilkTeaAdapterCh(getContext(), item);
+                    adapter = new MilkTeaAdapter(getContext(), item);
                     lsMilk.setAdapter(adapter);
                 }else {
                     adapter.update(item);
