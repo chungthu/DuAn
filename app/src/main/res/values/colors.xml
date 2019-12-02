@@ -23,4 +23,7 @@
     <color name="tvPrice">#ff0000</color>
     <color name="background">#ECECEC</color>
     <color name="bg_pay">#1B72C6</color>
+
+    <color name="textwhite">#FFFFFF</color>
+    <color name="textBlack">#000000</color>
 </resources>

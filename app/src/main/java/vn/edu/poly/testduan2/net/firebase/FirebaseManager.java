@@ -15,22 +15,29 @@ import androidx.annotation.NonNull;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
+import vn.edu.poly.testduan2.interfaces.DataTableStatus;
+import vn.edu.poly.testduan2.net.response.TableResponse;
 import vn.edu.poly.testduan2.net.response.Bill;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
 import vn.edu.poly.testduan2.net.response.FruitFirebase;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 
 public class FirebaseManager {
-    static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
-    static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
-    static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
+    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
+    private static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
     public static DatabaseReference mDatabaseBill = FirebaseDatabase.getInstance().getReference("Bill");
+    private static DatabaseReference mDatabaseTable = FirebaseDatabase.getInstance().getReference("Table");
+
     private List<MilkTeaFirebase> item = new ArrayList<>();
     private List<FruitFirebase> itemFruit = new ArrayList<>();
     private List<BreadFirebase> itemBr = new ArrayList<>();
-    DataMilkteaStatus dataMilkteaStatus;
-    DataFruitStatus dataFruitStatus;
-    DataBreadStatus dataBreadStatus;
+    private List<TableResponse> itemTableResponse = new ArrayList<>();
+
+    private DataMilkteaStatus dataMilkteaStatus;
+    private DataFruitStatus dataFruitStatus;
+    private DataBreadStatus dataBreadStatus;
+    private DataTableStatus dataTableStatus;
 
     public void setDataMilkteaStatus(DataMilkteaStatus dataMilkteaStatus) {
         this.dataMilkteaStatus = dataMilkteaStatus;
@@ -44,11 +51,13 @@ public class FirebaseManager {
         this.dataBreadStatus = dataBreadStatus;
     }
 
+    public void setDataTableStatus(DataTableStatus dataTableStatus) {
+        this.dataTableStatus = dataTableStatus;
+    }
+
     /**
-    Table milk tea
+    TableResponse milk tea
      **/
-
-
 
     //Insert
     public static void insertMilkTea(Context context, String name, String id_category, String name_category, String image ,
@@ -93,7 +102,7 @@ public class FirebaseManager {
 
 
     /**
-     Table Fruit
+     TableResponse Fruit
      **/
 
 
@@ -139,7 +148,7 @@ public class FirebaseManager {
 
 
     /**
-     Table Bread
+     TableResponse Bread
      **/
 
 
@@ -185,12 +194,36 @@ public class FirebaseManager {
 
 
     /**
-     Table Bread
+     TableResponse Bread
      **/
 
     //Insert
     public static void insertBill(Bill bill){
         mDatabaseBill.child(bill.getID()).setValue(bill);
+    }
+
+
+    /**
+     TableResponse TableResponse
+     **/
+
+    public void readAllTable(){
+        mDatabaseTable.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemTableResponse.clear();
+                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                    TableResponse tableResponse = childDataSnapshot.getValue(TableResponse.class);
+                    itemTableResponse.add(tableResponse);
+                }
+                dataTableStatus.getData(itemTableResponse);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }

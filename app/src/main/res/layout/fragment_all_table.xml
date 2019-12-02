@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="@dimen/_5sdp"
     tools:context=".view.fragment.AllTableFragment">
 
     <LinearLayout
@@ -15,6 +14,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_buyon"
+            android:layout_margin="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_70sdp"
             android:background="@android:color/background_light"

@@ -151,8 +151,6 @@ public class AddProductCHActivity extends BaseActivity {
     }
 
 }
-
-
     private void insertMilkTea() {
         String nameproduct = edtName.getText().toString();
         String idcategory = edtCategory.getText().toString();
