@@ -28,16 +28,16 @@ public class TabProdcutAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = new Fragment();
         switch (position) {
-            case 0:
+            case 3:
                 fragment = AllProductFragment.newInstance();
                 break;
-            case 1:
+            case 0:
                 fragment = MilkTeaFragment.newInstance();
                 break;
-            case 2:
+            case 1:
                 fragment = FruitFragment.newInstance();
                 break;
-            case 3:
+            case 2:
                 fragment = BreadFragment.newInstance();
                 break;
             default:
@@ -48,7 +48,7 @@ public class TabProdcutAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Nullable
