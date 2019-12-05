@@ -29,6 +29,13 @@ public class SetupTableFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public static SetupTableFragment newInstance() {
+        SetupTableFragment fragment = new SetupTableFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
 
     @Override
     protected int getLayoutId() {

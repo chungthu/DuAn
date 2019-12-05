@@ -1,26 +1,41 @@
 package vn.edu.poly.testduan2.net.firebase;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.bumptech.glide.load.data.DataFetcher;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
+import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
+import vn.edu.poly.testduan2.common.evenBus.LoginEven;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
 import vn.edu.poly.testduan2.interfaces.DataTableStatus;
-import vn.edu.poly.testduan2.net.response.TableResponse;
 import vn.edu.poly.testduan2.net.response.Bill;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
 import vn.edu.poly.testduan2.net.response.FruitFirebase;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
+import vn.edu.poly.testduan2.net.response.TableResponse;
+import vn.edu.poly.testduan2.net.response.UserResponse;
 
 public class FirebaseManager {
     private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
@@ -28,6 +43,7 @@ public class FirebaseManager {
     private static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
     public static DatabaseReference mDatabaseBill = FirebaseDatabase.getInstance().getReference("Bill");
     private static DatabaseReference mDatabaseTable = FirebaseDatabase.getInstance().getReference("Table");
+    private static DatabaseReference mDatabaseUser = FirebaseDatabase.getInstance().getReference("User");
 
     private List<MilkTeaFirebase> item = new ArrayList<>();
     private List<FruitFirebase> itemFruit = new ArrayList<>();
@@ -224,6 +240,50 @@ public class FirebaseManager {
 
             }
         });
+    }
+
+    /**
+     TableResponse User
+     **/
+
+    public void login(String user, String password){
+        Query query = mDatabaseUser.orderByChild("username").equalTo(user);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    if (data.getValue(UserResponse.class).getPassword().equals(password)) {
+                        EventBus.getDefault().post(new EvenUpdate(EventBusAction.LOGIN_SUCCESS));
+                        Log.e("AAA", "onDataChange: "+data.getValue(UserResponse.class).getId());
+                    } else {
+                        EventBus.getDefault().post(new EvenUpdate(EventBusAction.LOGIN_FAILL));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public UserResponse getUserbyID(String id){
+        final UserResponse[] userResponse = new UserResponse[1];
+        Query query = mDatabaseUser.orderByChild("id").equalTo(id);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    userResponse[0] = data.getValue(UserResponse.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return userResponse[0];
     }
 
 }

@@ -6,4 +6,7 @@ public class EventBusAction {
     public static final String FRUIT_DETAIL = "FRUIT_DETAIL";
     public static final String BREAD_DETAIL = "BREAD_DETAIL";
     public static final String DATA_BILL = "DATA_BILL";
+    public static final String LOGIN_SUCCESS = "LOGIN_SUCCESS";
+    public static final String LOGIN_FAILL = "LOGIN_FAILL";
+
 }
