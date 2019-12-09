@@ -3,6 +3,7 @@ package vn.edu.poly.testduan2.common.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constants;
 
 public class Utils {
@@ -34,5 +35,9 @@ public class Utils {
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(keyName);
         editor.apply();
+    }
+
+    public static String nameBill(){
+        return "BILL_"+ConstactChange.USER_RESPONSE.getUsername()+"0"+ConstactChange.USER_RESPONSE.getBill_position();
     }
 }

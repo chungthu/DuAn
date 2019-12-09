@@ -25,13 +25,16 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.common.utils.Utils;
 import vn.edu.poly.testduan2.controller.TabProdcutAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
-import vn.edu.poly.testduan2.net.response.Bill;
+import vn.edu.poly.testduan2.net.response.BillResponse;
+import vn.edu.poly.testduan2.net.response.TableResponse;
 
 public class ListProductActivity extends BaseActivity {
 
@@ -47,6 +50,8 @@ public class ListProductActivity extends BaseActivity {
     @BindView(R.id.ll_finish)
     LinearLayout llFinish;
     private TabProdcutAdapter adapter;
+    private TableResponse tableResponse;
+    private FirebaseManager firebaseManager = new FirebaseManager();
 
     @Override
     protected int getActivityLayoutId() {
@@ -115,6 +120,15 @@ public class ListProductActivity extends BaseActivity {
         }
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
+    public void handleEventTable(EvenTable event) {
+        switch (event.action) {
+            case EventBusAction.TABLE_SELECT:
+                tableResponse = (TableResponse) event.object;
+                break;
+        }
+    }
+
     @OnClick({R.id.ll_reChoose, R.id.ll_finish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -138,10 +152,38 @@ public class ListProductActivity extends BaseActivity {
                 total = total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
             }
             String totals = String.valueOf(total);
-            Bill bill = new Bill(key, ConstactChange.productList, String.valueOf(currentTime),"Nguyen Thanh CHung",totals,false);
-            EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL,bill,0));
+            String namebill = Utils.nameBill();
+            if (tableResponse != null){
+                BillResponse billResponse = new BillResponse(key,
+                        namebill,
+                        tableResponse.getId(),
+                        ConstactChange.productList,
+                        String.valueOf(currentTime),
+                        ConstactChange.USER_RESPONSE.getId(),
+                        totals,
+                        false);
+                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse,0));
+                int i = ConstactChange.USER_RESPONSE.getBill_position();
+                i++;
+                ConstactChange.USER_RESPONSE.setBill_position(i);
+                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(),ConstactChange.USER_RESPONSE);
+            }else {
+                BillResponse billResponse = new BillResponse(key,
+                        namebill,
+                        "",
+                        ConstactChange.productList,
+                        String.valueOf(currentTime),
+                        ConstactChange.USER_RESPONSE.getId(),
+                        totals,
+                        false);
+                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse,0));
+                int i = ConstactChange.USER_RESPONSE.getBill_position();
+                i++;
+                ConstactChange.USER_RESPONSE.setBill_position(i);
+                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(),ConstactChange.USER_RESPONSE);
+            }
         }else {
-            Toast.makeText(this, "Bạn cần chọn ít nhất 1 sản phẩm!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You need to choose at least 1 product!", Toast.LENGTH_SHORT).show();
         }
     }
 

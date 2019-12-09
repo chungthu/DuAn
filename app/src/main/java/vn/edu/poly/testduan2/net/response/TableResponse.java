@@ -6,12 +6,12 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class TableResponse {
     private String id;
     private String name;
-    private Long status;
+    private int status;
 
     public TableResponse() {
     }
 
-    public TableResponse(String id, String name, Long status) {
+    public TableResponse(String id, String name, int status) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -33,11 +33,11 @@ public class TableResponse {
         this.name = name;
     }
 
-    public Long getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

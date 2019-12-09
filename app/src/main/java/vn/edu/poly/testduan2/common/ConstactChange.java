@@ -7,6 +7,7 @@ import vn.edu.poly.testduan2.net.response.BreadFirebase;
 import vn.edu.poly.testduan2.net.response.FruitFirebase;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
 import vn.edu.poly.testduan2.net.response.Product;
+import vn.edu.poly.testduan2.net.response.UserResponse;
 
 public class ConstactChange {
 
@@ -16,5 +17,7 @@ public class ConstactChange {
     public static BreadFirebase BREAD;
     public static List<Product> productList = new ArrayList<>();
     public static int id_position = 1;
+
+    public static UserResponse USER_RESPONSE;
 
 }

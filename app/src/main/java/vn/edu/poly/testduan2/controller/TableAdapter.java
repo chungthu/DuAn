@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -18,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.evenBus.EvenTable;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.net.response.TableResponse;
+import vn.edu.poly.testduan2.view.activity.BillActivity;
 import vn.edu.poly.testduan2.view.activity.ListProductActivity;
 
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
@@ -54,6 +59,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
                 @Override
                 public void onClick(View view) {
                     context.startActivity(new Intent(context, ListProductActivity.class));
+                    EventBus.getDefault().postSticky(new EvenTable(EventBusAction.TABLE_SELECT,item.get(position)));
                 }
             });
         }else {
@@ -64,7 +70,8 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
             holder.cardTable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    context.startActivity(new Intent(context, ListProductActivity.class));
+                    context.startActivity(new Intent(context, BillActivity.class));
+                    EventBus.getDefault().postSticky(new EvenTable(EventBusAction.TABLE_SELECT,item.get(position)));
                 }
             });
         }

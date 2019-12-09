@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import org.greenrobot.eventbus.EventBus;
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.evenBus.EvenTable;
+import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.controller.TableAdapter;
 import vn.edu.poly.testduan2.interfaces.DataTableStatus;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
@@ -54,6 +58,7 @@ public class EmptyTableFragment extends BaseFragment {
     @OnClick(R.id.cv_buyon)
     public void onViewClicked() {
         startActivity(new Intent(getContext(), ListProductActivity.class));
+        EventBus.getDefault().postSticky(new EvenTable(EventBusAction.TABLE_SELECT,null));
     }
 
     private void setup() {

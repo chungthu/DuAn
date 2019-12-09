@@ -1,6 +1,7 @@
 package vn.edu.poly.testduan2.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,25 +11,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
 import vn.edu.poly.testduan2.controller.BillAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
-import vn.edu.poly.testduan2.net.response.Bill;
+import vn.edu.poly.testduan2.net.response.BillResponse;
+import vn.edu.poly.testduan2.net.response.TableResponse;
 
 public class BillActivity extends BaseActivity {
 
@@ -44,8 +47,12 @@ public class BillActivity extends BaseActivity {
     TextView tvPay;
     @BindView(R.id.tv_Noti)
     TextView tvNoti;
+    @BindView(R.id.tv_table)
+    TextView tv_Table;
     private BillAdapter adapter;
-    private Bill bill;
+    private BillResponse billResponse;
+    private TableResponse tableResponse;
+    private FirebaseManager firebaseManager = new FirebaseManager();
 
     @Override
     protected int getActivityLayoutId() {
@@ -59,10 +66,10 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected String getNavigationTitle() {
-//        if (bill != null){
-//            return bill.getID();
+//        if (billResponse != null){
+//            return billResponse.getID();
 //        }
-        return "Bill";
+        return "BillResponse";
     }
 
     @SuppressLint("NewApi")
@@ -90,11 +97,26 @@ public class BillActivity extends BaseActivity {
     public void handleEvent(MessageEvent event) {
         switch (event.action) {
             case EventBusAction.DATA_BILL:
-                bill = (Bill) event.object;
-                setUp(bill);
+                billResponse = (BillResponse) event.object;
+                setUp(billResponse);
                 break;
         }
         updateNavigationBar();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
+    public void handleEventTable(EvenTable event) {
+        switch (event.action) {
+            case EventBusAction.TABLE_SELECT:
+                tableResponse = (TableResponse) event.object;
+                if (tableResponse != null) {
+                    tv_Table.setText(tableResponse.getName());
+                }else {
+                    tv_Table.setText(getString(R.string.key_buy_on));
+                }
+
+                break;
+        }
     }
 
     @Override
@@ -108,10 +130,13 @@ public class BillActivity extends BaseActivity {
             case R.id.ll_status_order:
                 break;
             case R.id.tv_Pay:
-                FirebaseManager.insertBill(bill);
+                firebaseManager.insertBill(billResponse);
+                tableResponse.setStatus(1);
+                firebaseManager.updateTable(tableResponse.getId(),tableResponse);
                 ConstactChange.productList.clear();
                 EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
                 Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(BillActivity.this,MainActivity.class));
                 finish();
                 break;
             case R.id.tv_Noti:
@@ -119,16 +144,16 @@ public class BillActivity extends BaseActivity {
         }
     }
 
-    private void setUp(Bill item) {
+    private void setUp(BillResponse item) {
         adapter = new BillAdapter(this, item.getProducts());
         rvItemBill.setLayoutManager(new LinearLayoutManager(this));
         rvItemBill.setHasFixedSize(true);
         rvItemBill.setAdapter(adapter);
 
-        if (bill != null) {
+        if (billResponse != null) {
             int total = 0;
-            for (int j = 0; j < bill.getProducts().size(); j++){
-                total = total + Integer.parseInt(bill.getProducts().get(j).getTotal());
+            for (int j = 0; j < billResponse.getProducts().size(); j++) {
+                total = total + Integer.parseInt(billResponse.getProducts().get(j).getTotal());
             }
             tvTotal.setText(String.valueOf(total));
         }
@@ -143,10 +168,10 @@ public class BillActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (bill != null) {
+                if (billResponse != null) {
                     int total = 0;
-                    for (int j = 0; j < bill.getProducts().size(); j++){
-                        total = total + Integer.parseInt(bill.getProducts().get(j).getTotal());
+                    for (int j = 0; j < billResponse.getProducts().size(); j++) {
+                        total = total + Integer.parseInt(billResponse.getProducts().get(j).getTotal());
                     }
                     tvTotal.setText(String.valueOf(total));
                 }
@@ -158,5 +183,12 @@ public class BillActivity extends BaseActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

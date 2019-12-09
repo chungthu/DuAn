@@ -26,6 +26,11 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_keyboard_arrow_right_gray_24dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_table"/>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

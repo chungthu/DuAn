@@ -5,22 +5,26 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.List;
 
 @IgnoreExtraProperties
-public class Bill {
+public class BillResponse {
     String ID;
+    String name;
+    String id_table;
     List<Product> products;
     String time;
-    String responsible;
+    String id_responsible;
     String total;
     boolean status_pay = false;
 
-    public Bill() {
+    public BillResponse() {
     }
 
-    public Bill(String ID, List<Product> products, String time, String responsible, String total, boolean status_pay) {
+    public BillResponse(String ID, String name, String id_table, List<Product> products, String time, String id_responsible, String total, boolean status_pay) {
         this.ID = ID;
+        this.name = name;
+        this.id_table = id_table;
         this.products = products;
         this.time = time;
-        this.responsible = responsible;
+        this.id_responsible = id_responsible;
         this.total = total;
         this.status_pay = status_pay;
     }
@@ -31,6 +35,22 @@ public class Bill {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId_table() {
+        return id_table;
+    }
+
+    public void setId_table(String id_table) {
+        this.id_table = id_table;
     }
 
     public List<Product> getProducts() {
@@ -49,12 +69,12 @@ public class Bill {
         this.time = time;
     }
 
-    public String getResponsible() {
-        return responsible;
+    public String getId_responsible() {
+        return id_responsible;
     }
 
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
+    public void setId_responsible(String id_responsible) {
+        this.id_responsible = id_responsible;
     }
 
     public String getTotal() {

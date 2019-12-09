@@ -16,9 +16,9 @@
     <string name="menu_print">Máy in</string>
     <string name="menu_logout">Đăng xuất</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_bread">Bánh mỳ</string>
-    <string name="title_milk_tea">Trà sữa</string>
-    <string name="title_fruit">Nước ép</string>
+    <string name="title_bread">Bread</string>
+    <string name="title_milk_tea">Milk </string>
+    <string name="title_fruit">Fruit</string>
 
     <string name="user">Tên tài khoản</string>
     <string name="password">Mật khẩu</string>

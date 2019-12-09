@@ -15,7 +15,7 @@ import vn.edu.poly.testduan2.view.fragment.MilkTeaFragment;
 
 public class TabProdcutAdapter extends FragmentPagerAdapter {
 
-    private static final int[] TAB_TITLES = new int[]{R.string.key_all_product, R.string.title_milk_tea, R.string.title_fruit, R.string.title_bread};
+    private static final int[] TAB_TITLES = new int[]{R.string.title_milk_tea, R.string.title_fruit, R.string.title_bread, R.string.key_all_product};
     private final Context mContext;
 
     public TabProdcutAdapter(@NonNull FragmentManager fm, Context mContext) {

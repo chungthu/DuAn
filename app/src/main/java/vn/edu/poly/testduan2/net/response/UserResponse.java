@@ -8,15 +8,17 @@ public class UserResponse {
     String username;
     String password;
     int position;
+    int bill_position;
 
     public UserResponse() {
     }
 
-    public UserResponse(String id, String username, String password, int position) {
+    public UserResponse(String id, String username, String password, int position, int bill_position) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.position = position;
+        this.bill_position = bill_position;
     }
 
     public String getId() {
@@ -49,5 +51,13 @@ public class UserResponse {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public int getBill_position() {
+        return bill_position;
+    }
+
+    public void setBill_position(int bill_position) {
+        this.bill_position = bill_position;
     }
 }
