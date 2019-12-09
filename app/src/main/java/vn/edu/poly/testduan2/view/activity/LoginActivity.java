@@ -40,6 +40,7 @@ import butterknife.internal.Utils;
 import dmax.dialog.SpotsDialog;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.evenBus.EvenLogin;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.LoginEven;
@@ -78,6 +79,8 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
+
+        edtUser.setText("chungnt");
     }
 
     @OnClick({R.id.checkBox, R.id.btnLogin})
@@ -101,7 +104,7 @@ public class LoginActivity extends BaseActivity {
             edtPass.setError(getString(R.string.error_emptypass));
         } else {
             waitingDialog.show();
-            firebaseManager.login(user, pass);
+            firebaseManager.login(this,user, pass);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
@@ -115,8 +118,8 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleLoginEvent(EvenUpdate event) throws IOException {
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void handleLoginEvent(EvenLogin event) throws IOException {
         switch (event.action) {
             case EventBusAction.LOGIN_SUCCESS:
                 waitingDialog.dismiss();

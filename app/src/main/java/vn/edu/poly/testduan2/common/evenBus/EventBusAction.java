@@ -8,5 +8,8 @@ public class EventBusAction {
     public static final String DATA_BILL = "DATA_BILL";
     public static final String LOGIN_SUCCESS = "LOGIN_SUCCESS";
     public static final String LOGIN_FAILL = "LOGIN_FAILL";
+    public static final String UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+
+
 
 }

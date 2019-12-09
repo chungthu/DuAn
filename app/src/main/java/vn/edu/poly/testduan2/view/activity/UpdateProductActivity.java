@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
-import vn.edu.poly.testduan2.common.Constacts;
+import vn.edu.poly.testduan2.common.Constants;
 import vn.edu.poly.testduan2.common.ImageFirebaseUtils;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
@@ -158,13 +158,13 @@ public class UpdateProductActivity extends BaseActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, Constacts.REQUEST_CODE_IMAGE);
+        startActivityForResult(intent, Constants.REQUEST_CODE_IMAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Constacts.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == Constants.REQUEST_CODE_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uriImage = data.getData();
             imgProduct.setImageURI(uriImage);
             image = ImageFirebaseUtils.fileUploader(this, uriImage);

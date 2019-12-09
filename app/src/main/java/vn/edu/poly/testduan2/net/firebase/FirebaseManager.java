@@ -22,10 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+
+import vn.edu.poly.testduan2.common.Constants;
+import vn.edu.poly.testduan2.common.evenBus.EvenLogin;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.LoginEven;
+import vn.edu.poly.testduan2.common.utils.Utils;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
@@ -246,7 +250,7 @@ public class FirebaseManager {
      TableResponse User
      **/
 
-    public void login(String user, String password){
+    public void login(Context context, String user, String password){
         Query query = mDatabaseUser.orderByChild("username").equalTo(user);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -254,10 +258,10 @@ public class FirebaseManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     if (data.getValue(UserResponse.class).getPassword().equals(password)) {
-                        EventBus.getDefault().post(new EvenUpdate(EventBusAction.LOGIN_SUCCESS));
-                        Log.e("AAA", "onDataChange: "+data.getValue(UserResponse.class).getId());
+                        Utils.saveSharedPreferences(context, Constants.LOGIN_SUCCESS,data.getValue(UserResponse.class).getId());
+                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS,data.getValue(UserResponse.class)));
                     } else {
-                        EventBus.getDefault().post(new EvenUpdate(EventBusAction.LOGIN_FAILL));
+                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_FAILL,null));
                     }
                 }
             }
@@ -268,14 +272,13 @@ public class FirebaseManager {
         });
     }
 
-    public UserResponse getUserbyID(String id){
-        final UserResponse[] userResponse = new UserResponse[1];
+    public void getUserbyID(String id){
         Query query = mDatabaseUser.orderByChild("id").equalTo(id);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    userResponse[0] = data.getValue(UserResponse.class);
+                    EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS,data.getValue(UserResponse.class)));
                 }
             }
 
@@ -283,7 +286,11 @@ public class FirebaseManager {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
-        return userResponse[0];
+    }
+
+    public void updateUser(String key, UserResponse userResponse){
+        mDatabaseUser.child(key).setValue(userResponse);
+        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.UPDATE_USER_SUCCESS,null));
     }
 
 }

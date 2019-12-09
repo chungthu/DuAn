@@ -77,4 +77,15 @@
     <string name="key_total">Total</string>
     <string name="key_Pay">Pay</string>
     <string name="key_Notification">Notification</string>
+    <string name="key_reset_password">Change password</string>
+    <string name="key_logout">Logout</string>
+    <string name="quizLogout">Do you really want to logout?</string>
+    <string name="key_old_password">Old Password</string>
+    <string name="key_new_password">New password</string>
+    <string name="key_reEnter_password">Re_Enter Password</string>
+    <string name="key_changePassword">Change Password</string>
+    <string name="key_emtry">Data entry required</string>
+    <string name="key_Password_does_not_match">Password does not match</string>
+    <string name="key_Incorrect_password">Incorrect password</string>
+    <string name="key_changePassword_Success">Change Password Success</string>
 </resources>
