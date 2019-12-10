@@ -19,5 +19,6 @@ public class ConstactChange {
     public static int id_position = 1;
 
     public static UserResponse USER_RESPONSE;
+    public static int Status_Table = 0;
 
 }

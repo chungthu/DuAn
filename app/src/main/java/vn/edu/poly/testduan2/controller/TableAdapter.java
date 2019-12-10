@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.edu.poly.testduan2.R;
+import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.net.response.TableResponse;
@@ -60,6 +61,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
                 public void onClick(View view) {
                     context.startActivity(new Intent(context, ListProductActivity.class));
                     EventBus.getDefault().postSticky(new EvenTable(EventBusAction.TABLE_SELECT,item.get(position)));
+                    ConstactChange.Status_Table = 0;
                 }
             });
         }else {
@@ -72,6 +74,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
                 public void onClick(View view) {
                     context.startActivity(new Intent(context, BillActivity.class));
                     EventBus.getDefault().postSticky(new EvenTable(EventBusAction.TABLE_SELECT,item.get(position)));
+                    ConstactChange.Status_Table = 1;
                 }
             });
         }

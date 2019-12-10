@@ -11,15 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
@@ -66,9 +66,6 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected String getNavigationTitle() {
-//        if (billResponse != null){
-//            return billResponse.getID();
-//        }
         return "BillResponse";
     }
 
@@ -111,7 +108,8 @@ public class BillActivity extends BaseActivity {
                 tableResponse = (TableResponse) event.object;
                 if (tableResponse != null) {
                     tv_Table.setText(tableResponse.getName());
-                }else {
+                    setUpIfOrder();
+                } else {
                     tv_Table.setText(getString(R.string.key_buy_on));
                 }
 
@@ -131,12 +129,14 @@ public class BillActivity extends BaseActivity {
                 break;
             case R.id.tv_Pay:
                 firebaseManager.insertBill(billResponse);
-                tableResponse.setStatus(1);
-                firebaseManager.updateTable(tableResponse.getId(),tableResponse);
+                if (tableResponse != null) {
+                    tableResponse.setStatus(1);
+                    firebaseManager.updateTable(tableResponse.getId(), tableResponse);
+                }
                 ConstactChange.productList.clear();
                 EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
                 Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(BillActivity.this,MainActivity.class));
+                startActivity(new Intent(BillActivity.this, MainActivity.class));
                 finish();
                 break;
             case R.id.tv_Noti:
@@ -158,6 +158,12 @@ public class BillActivity extends BaseActivity {
             tvTotal.setText(String.valueOf(total));
         }
 
+    }
+
+    private void setUpIfOrder(){
+        if (ConstactChange.Status_Table == 1){
+            firebaseManager.bill(tableResponse.getId());
+        }
     }
 
     private void setUptotal() {
@@ -185,10 +191,4 @@ public class BillActivity extends BaseActivity {
         });
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

@@ -1,6 +1,7 @@
 package vn.edu.poly.testduan2.net.firebase;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,7 +68,7 @@ public class FirebaseManager {
     }
 
     /**
-    TableResponse milk tea
+    Table milk tea
      **/
 
     //Insert
@@ -113,7 +114,7 @@ public class FirebaseManager {
 
 
     /**
-     TableResponse Fruit
+     Table Fruit
      **/
 
 
@@ -159,7 +160,7 @@ public class FirebaseManager {
 
 
     /**
-     TableResponse Bread
+     Table Bread
      **/
 
 
@@ -205,7 +206,7 @@ public class FirebaseManager {
 
 
     /**
-     TableResponse Bread
+     Table Bread
      **/
 
     //Insert
@@ -213,9 +214,26 @@ public class FirebaseManager {
         mDatabaseBill.child(billResponse.getID()).setValue(billResponse);
     }
 
+    public void bill(String table_id){
+        Query query = mDatabaseBill.orderByChild("status_pay").equalTo(false).;
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Log.e("AAA", "onDataChange: "+"Chung" );
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     /**
-     TableResponse TableResponse
+     Table TableResponse
      **/
 
     public void readAllTable(){
@@ -243,7 +261,7 @@ public class FirebaseManager {
 
 
     /**
-     TableResponse User
+     Table User
      **/
 
     public void login(Context context, String user, String password){
@@ -288,7 +306,7 @@ public class FirebaseManager {
 
     public void updateUser(String key, UserResponse userResponse){
         mDatabaseUser.child(key).setValue(userResponse);
-        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.UPDATE_USER_SUCCESS,null));
+        EventBus.getDefault().post(new EvenLogin(EventBusAction.UPDATE_USER_SUCCESS,null));
     }
 
 }

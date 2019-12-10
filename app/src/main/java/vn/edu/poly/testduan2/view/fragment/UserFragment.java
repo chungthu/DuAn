@@ -77,6 +77,14 @@ public class UserFragment extends BaseFragment {
                 userResponse = (UserResponse) event.object;
                 tvNameAccount.setText(userResponse.getUsername());
                 break;
+            default:
+                break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleUpdateEvent(EvenLogin event) throws IOException {
+        switch (event.action) {
             case EventBusAction.UPDATE_USER_SUCCESS:
                 AlertDialog.Builder dialog_builder = new AlertDialog.Builder(getContext());
                 dialog_builder.setMessage(getString(R.string.key_changePassword_Success));
