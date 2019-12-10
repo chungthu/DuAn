@@ -57,6 +57,153 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/ln_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/ln_search_milk"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name_search_milk"
+                android:textSize="@dimen/_12sdp"
+                android:text="@string/title_milk_tea"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_milk1"
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorPrimary"
+                android:text="("
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_size_milk"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorPrimary"
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_milk2"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorPrimary"
+                android:text=")"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/ln_search_fruit"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name_search_fruit"
+                android:textSize="@dimen/_12sdp"
+                android:text="@string/title_fruit"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_fruit1"
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12sdp"
+                android:text="("
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_size_fruit"
+                android:textSize="@dimen/_12sdp"
+                android:text="0"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_fruit2"
+                android:textSize="@dimen/_12sdp"
+                android:text=")"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln_search_bread"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_name_search_bread"
+                android:textSize="@dimen/_12sdp"
+                android:text="@string/title_bread"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_bread1"
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12sdp"
+                android:text="("
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_size_bread"
+                android:textSize="@dimen/_12sdp"
+                android:text="0"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_n_search_bread2"
+                android:textSize="@dimen/_12sdp"
+                android:text=")"
+                android:textColor="@android:color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"

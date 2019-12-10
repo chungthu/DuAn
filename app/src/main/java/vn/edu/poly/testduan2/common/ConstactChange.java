@@ -21,4 +21,8 @@ public class ConstactChange {
     public static UserResponse USER_RESPONSE;
     public static int Status_Table = 0;
 
+    public static List<MilkTeaFirebase> listMilkTeaSearch = new ArrayList<>();
+    public static List<FruitFirebase> listFruitSearch = new ArrayList<>();
+    public static List<BreadFirebase> listBreadSearch = new ArrayList<>();
+
 }

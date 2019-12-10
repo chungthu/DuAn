@@ -19,8 +19,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.Constants;
 import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
@@ -152,6 +155,7 @@ public class ListProductActivity extends BaseActivity {
             startActivity(new Intent(this, BillActivity.class));
             String key = FirebaseManager.mDatabaseBill.push().getKey();
             Date currentTime = Calendar.getInstance().getTime();
+            String time = new SimpleDateFormat(Constants.DEFAULT_FORMAT_DATETIME, Locale.getDefault()).format(currentTime);
             int total = 0;
             for (int i = 0; i < ConstactChange.productList.size(); i++) {
                 total = total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
@@ -163,7 +167,7 @@ public class ListProductActivity extends BaseActivity {
                         namebill,
                         tableResponse.getId(),
                         ConstactChange.productList,
-                        String.valueOf(currentTime),
+                        time,
                         ConstactChange.USER_RESPONSE.getId(),
                         totals,
                         false);
@@ -177,7 +181,7 @@ public class ListProductActivity extends BaseActivity {
                         namebill,
                         "",
                         ConstactChange.productList,
-                        String.valueOf(currentTime),
+                        time,
                         ConstactChange.USER_RESPONSE.getId(),
                         totals,
                         false);

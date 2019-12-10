@@ -72,7 +72,7 @@ public class FirebaseManager {
         this.dataTableStatus = dataTableStatus;
     }
 
-    public void setDataBillTable(DataBillTable dataBillTable){
+    public void setDataBillTable(DataBillTable dataBillTable) {
         this.dataBillTable = dataBillTable;
     }
 
@@ -112,7 +112,10 @@ public class FirebaseManager {
                     MilkTeaFirebase milkTeaFirebase = childDataSnapshot.getValue(MilkTeaFirebase.class);
                     item.add(milkTeaFirebase);
                 }
-                dataMilkteaStatus.getData(item);
+                if (item != null && item.size() > 0){
+                    dataMilkteaStatus.getData(item);
+                    ConstactChange.listMilkTeaSearch = item;
+                }
             }
 
             @Override
@@ -157,7 +160,10 @@ public class FirebaseManager {
                     FruitFirebase fruitFirebase = childDataSnapshot.getValue(FruitFirebase.class);
                     itemFruit.add(fruitFirebase);
                 }
-                dataFruitStatus.getData(itemFruit);
+                if (itemFruit != null && itemFruit.size() > 0){
+                    dataFruitStatus.getData(itemFruit);
+                    ConstactChange.listFruitSearch = itemFruit;
+                }
             }
 
             @Override
@@ -203,7 +209,10 @@ public class FirebaseManager {
                     BreadFirebase breadFirebase = childDataSnapshot.getValue(BreadFirebase.class);
                     itemBr.add(breadFirebase);
                 }
-                dataBreadStatus.getData(itemBr);
+                if (itemBr != null && itemBr.size() > 0){
+                    dataBreadStatus.getData(itemBr);
+                    ConstactChange.listBreadSearch = itemBr;
+                }
             }
 
             @Override
@@ -229,7 +238,7 @@ public class FirebaseManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemBillTable.clear();
                 for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
-                    if (childDataSnapshot.getValue(BillResponse.class).getId_table().equals(id_table)){
+                    if (childDataSnapshot.getValue(BillResponse.class).getId_table().equals(id_table)) {
                         BillResponse billResponse = childDataSnapshot.getValue(BillResponse.class);
                         itemBillTable.add(billResponse);
                     }
@@ -244,7 +253,7 @@ public class FirebaseManager {
         });
     }
 
-    public void updateBill(String id, BillResponse billResponse){
+    public void updateBill(String id, BillResponse billResponse) {
         mDatabaseBill.child(id).setValue(billResponse);
     }
 
