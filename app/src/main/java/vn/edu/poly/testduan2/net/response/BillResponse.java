@@ -6,7 +6,7 @@ import java.util.List;
 
 @IgnoreExtraProperties
 public class BillResponse {
-    String ID;
+    String id;
     String name;
     String id_table;
     List<Product> products;
@@ -18,8 +18,8 @@ public class BillResponse {
     public BillResponse() {
     }
 
-    public BillResponse(String ID, String name, String id_table, List<Product> products, String time, String id_responsible, String total, boolean status_pay) {
-        this.ID = ID;
+    public BillResponse(String id, String name, String id_table, List<Product> products, String time, String id_responsible, String total, boolean status_pay) {
+        this.id = id;
         this.name = name;
         this.id_table = id_table;
         this.products = products;
@@ -29,12 +29,12 @@ public class BillResponse {
         this.status_pay = status_pay;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

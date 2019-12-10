@@ -12,6 +12,9 @@ public class Product {
     String price;
     String total;
 
+    public Product() {
+    }
+
     public Product(String id, String name, String image, String amount, String price, String total) {
         this.id = id;
         this.name = name;

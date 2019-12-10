@@ -49,7 +49,6 @@ import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 
 public class LoginActivity extends BaseActivity {
 
-
     @BindView(R.id.edtUser)
     EditText edtUser;
     @BindView(R.id.edtPass)
@@ -104,7 +103,7 @@ public class LoginActivity extends BaseActivity {
             edtPass.setError(getString(R.string.error_emptypass));
         } else {
             waitingDialog.show();
-            firebaseManager.login(this,user, pass);
+            firebaseManager.login(this, user, pass);
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override

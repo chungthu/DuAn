@@ -1,16 +1,17 @@
 package vn.edu.poly.testduan2.view.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebViewFragment;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,7 +22,11 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.Calendar;
 import java.util.Date;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
@@ -35,9 +40,9 @@ import vn.edu.poly.testduan2.controller.TabProdcutAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.net.response.BillResponse;
 import vn.edu.poly.testduan2.net.response.TableResponse;
+import vn.edu.poly.testduan2.view.fragment.SearchFragment;
 
 public class ListProductActivity extends BaseActivity {
-
 
     @BindView(R.id.tab_product)
     TabLayout tabProduct;
@@ -87,12 +92,12 @@ public class ListProductActivity extends BaseActivity {
     @SuppressLint("NewApi")
     @Override
     protected Icon getRightButtonIcon() {
-        return Icon.createWithResource(this, R.drawable.search);
+        return Icon.createWithResource(this, R.drawable.ic_search_white_24dp);
     }
 
     @Override
     protected void rightButtonClicked(View v) {
-        Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
+        Search();
     }
 
     @Override
@@ -105,7 +110,7 @@ public class ListProductActivity extends BaseActivity {
         this.vpProduct.setOffscreenPageLimit(3);
         this.vpProduct.setAdapter(adapter);
         this.tabProduct.setupWithViewPager(vpProduct);
-        if (ConstactChange.productList != null){
+        if (ConstactChange.productList != null) {
             tvAmount.setText(String.valueOf(ConstactChange.productList.size()));
         }
         tvAmount.setText(String.valueOf(ConstactChange.productList.size()));
@@ -142,7 +147,7 @@ public class ListProductActivity extends BaseActivity {
         }
     }
 
-    private void addBill(){
+    private void addBill() {
         if (ConstactChange.productList.size() > 0) {
             startActivity(new Intent(this, BillActivity.class));
             String key = FirebaseManager.mDatabaseBill.push().getKey();
@@ -153,7 +158,7 @@ public class ListProductActivity extends BaseActivity {
             }
             String totals = String.valueOf(total);
             String namebill = Utils.nameBill();
-            if (tableResponse != null){
+            if (tableResponse != null) {
                 BillResponse billResponse = new BillResponse(key,
                         namebill,
                         tableResponse.getId(),
@@ -162,12 +167,12 @@ public class ListProductActivity extends BaseActivity {
                         ConstactChange.USER_RESPONSE.getId(),
                         totals,
                         false);
-                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse,0));
+                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse, 0));
                 int i = ConstactChange.USER_RESPONSE.getBill_position();
                 i++;
                 ConstactChange.USER_RESPONSE.setBill_position(i);
-                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(),ConstactChange.USER_RESPONSE);
-            }else {
+                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
+            } else {
                 BillResponse billResponse = new BillResponse(key,
                         namebill,
                         "",
@@ -176,15 +181,22 @@ public class ListProductActivity extends BaseActivity {
                         ConstactChange.USER_RESPONSE.getId(),
                         totals,
                         false);
-                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse,0));
+                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse, 0));
                 int i = ConstactChange.USER_RESPONSE.getBill_position();
                 i++;
                 ConstactChange.USER_RESPONSE.setBill_position(i);
-                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(),ConstactChange.USER_RESPONSE);
+                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
             }
-        }else {
+        } else {
             Toast.makeText(this, "You need to choose at least 1 product!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void Search() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.nav_container1,new SearchFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

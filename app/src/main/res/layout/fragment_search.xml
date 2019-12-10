@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#3C000000"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragment.SearchFragment">
+
+    <RelativeLayout
+        android:id="@+id/nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center">
+
+
+        <LinearLayout
+            android:id="@+id/ll_click_search"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_weight="1"
+                android:src="@drawable/back"
+                android:layout_width="0dp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:contentDescription="TODO" />
+
+            <LinearLayout
+                android:layout_weight="8"
+                android:background="@drawable/bg_edt_search"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="@dimen/_30sdp">
+
+                <EditText
+                    style="@style/searchStyle"
+                    android:background="@color/color_opacity"
+                    android:id="@+id/sv_Search"
+                    android:layout_width="match_parent"
+                    android:textColor="@android:color/black"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/key_search" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>

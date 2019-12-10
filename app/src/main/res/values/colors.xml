@@ -26,4 +26,6 @@
 
     <color name="textwhite">#FFFFFF</color>
     <color name="textBlack">#000000</color>
+
+    <color name="color_opacity">#00000000</color>
 </resources>

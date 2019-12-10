@@ -88,4 +88,5 @@
     <string name="key_Password_does_not_match">Password does not match</string>
     <string name="key_Incorrect_password">Incorrect password</string>
     <string name="key_changePassword_Success">Change Password Success</string>
+    <string name="key_search">Search</string>
 </resources>

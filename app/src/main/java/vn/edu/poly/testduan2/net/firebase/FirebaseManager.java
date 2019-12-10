@@ -19,9 +19,12 @@ import androidx.annotation.NonNull;
 
 import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.Constants;
+import vn.edu.poly.testduan2.common.evenBus.EvenBill;
 import vn.edu.poly.testduan2.common.evenBus.EvenLogin;
+import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.utils.Utils;
+import vn.edu.poly.testduan2.interfaces.DataBillTable;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.interfaces.DataFruitStatus;
 import vn.edu.poly.testduan2.interfaces.DataMilkteaStatus;
@@ -45,11 +48,13 @@ public class FirebaseManager {
     private List<FruitFirebase> itemFruit = new ArrayList<>();
     private List<BreadFirebase> itemBr = new ArrayList<>();
     private List<TableResponse> itemTableResponse = new ArrayList<>();
+    private List<BillResponse> itemBillTable = new ArrayList<>();
 
     private DataMilkteaStatus dataMilkteaStatus;
     private DataFruitStatus dataFruitStatus;
     private DataBreadStatus dataBreadStatus;
     private DataTableStatus dataTableStatus;
+    private DataBillTable dataBillTable;
 
     public void setDataMilkteaStatus(DataMilkteaStatus dataMilkteaStatus) {
         this.dataMilkteaStatus = dataMilkteaStatus;
@@ -67,34 +72,38 @@ public class FirebaseManager {
         this.dataTableStatus = dataTableStatus;
     }
 
+    public void setDataBillTable(DataBillTable dataBillTable){
+        this.dataBillTable = dataBillTable;
+    }
+
     /**
-    Table milk tea
+     * Table milk tea
      **/
 
     //Insert
-    public void insertMilkTea(Context context, String name, String id_category, String name_category, String image ,
-                                     String priceM, String priceL, String description){
+    public void insertMilkTea(Context context, String name, String id_category, String name_category, String image,
+                              String priceM, String priceL, String description) {
         String key_milkteaId = mDatabase.push().getKey();
 
-        MilkTeaFirebase item = new MilkTeaFirebase(key_milkteaId,name,id_category,"ROYAL CHEESE",image,priceM,priceL,description);
+        MilkTeaFirebase item = new MilkTeaFirebase(key_milkteaId, name, id_category, "ROYAL CHEESE", image, priceM, priceL, description);
 
         assert key_milkteaId != null;
         mDatabase.child(key_milkteaId).setValue(item);
     }
 
     //Update
-    public void updateMilkTea(Context context,String id_product , MilkTeaFirebase item){
+    public void updateMilkTea(Context context, String id_product, MilkTeaFirebase item) {
         mDatabase.child(id_product).setValue(item);
     }
 
     //Delete
-    public void deleteMilkTea(Context context,String id_product){
+    public void deleteMilkTea(Context context, String id_product) {
         assert id_product != null;
         mDatabase.child(id_product).removeValue();
     }
 
     //ReadAll
-    public void reaAllDataTea(){
+    public void reaAllDataTea() {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -114,33 +123,32 @@ public class FirebaseManager {
 
 
     /**
-     Table Fruit
+     * Table Fruit
      **/
 
 
-
     //Insert
-    public void insertFruit(Context context, String name, String image, String price, String description){
+    public void insertFruit(Context context, String name, String image, String price, String description) {
         String key = mDatabaseFruit.push().getKey();
 
-        FruitFirebase item = new FruitFirebase(key,name,image,price,description);
+        FruitFirebase item = new FruitFirebase(key, name, image, price, description);
 
         assert key != null;
         mDatabaseFruit.child(key).setValue(item);
     }
 
     //Update
-    public void updateFruit(Context context,String id_product , FruitFirebase item){
+    public void updateFruit(Context context, String id_product, FruitFirebase item) {
         mDatabaseFruit.child(id_product).setValue(item);
     }
 
     //Delete
-    public void deleteFruit(Context context,String id_product){
+    public void deleteFruit(Context context, String id_product) {
         mDatabaseFruit.child(id_product).removeValue();
     }
 
     //ReadAll
-    public void reaAllFruit(){
+    public void reaAllFruit() {
         mDatabaseFruit.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -160,33 +168,33 @@ public class FirebaseManager {
 
 
     /**
-     Table Bread
+     * Table Bread
      **/
 
 
     //Insert
-    public void insertBread(Context context, String name, String image ,
-                                      String price, String description){
+    public void insertBread(Context context, String name, String image,
+                            String price, String description) {
         String key = mDatabaseBread.push().getKey();
 
-        BreadFirebase item = new BreadFirebase(key,name,image,price,description);
+        BreadFirebase item = new BreadFirebase(key, name, image, price, description);
 
         assert key != null;
         mDatabaseBread.child(key).setValue(item);
     }
 
     //Update
-    public void updateBread(Context context,String id_product , BreadFirebase item){
+    public void updateBread(Context context, String id_product, BreadFirebase item) {
         mDatabaseBread.child(id_product).setValue(item);
     }
 
     //Delete
-    public void deleteBread(Context context,String id_product){
+    public void deleteBread(Context context, String id_product) {
         mDatabaseBread.child(id_product).removeValue();
     }
 
     //ReadAll
-    public void readAllBread(){
+    public void readAllBread() {
         mDatabaseBread.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -206,22 +214,27 @@ public class FirebaseManager {
 
 
     /**
-     Table Bread
+     * Table Bill
      **/
 
     //Insert
-    public void insertBill(BillResponse billResponse){
-        mDatabaseBill.child(billResponse.getID()).setValue(billResponse);
+    public void insertBill(BillResponse billResponse) {
+        mDatabaseBill.child(billResponse.getId()).setValue(billResponse);
     }
 
-    public void bill(String table_id){
-        Query query = mDatabaseBill.orderByChild("status_pay").equalTo(false).;
+    public void bill(String id_table) {
+        Query query = mDatabaseBill.orderByChild("status_pay").equalTo(false);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Log.e("AAA", "onDataChange: "+"Chung" );
+                itemBillTable.clear();
+                for (DataSnapshot childDataSnapshot : dataSnapshot.getChildren()) {
+                    if (childDataSnapshot.getValue(BillResponse.class).getId_table().equals(id_table)){
+                        BillResponse billResponse = childDataSnapshot.getValue(BillResponse.class);
+                        itemBillTable.add(billResponse);
+                    }
                 }
+                dataBillTable.getData(itemBillTable);
             }
 
             @Override
@@ -231,12 +244,16 @@ public class FirebaseManager {
         });
     }
 
+    public void updateBill(String id, BillResponse billResponse){
+        mDatabaseBill.child(id).setValue(billResponse);
+    }
+
 
     /**
-     Table TableResponse
+     * Table TableResponse
      **/
 
-    public void readAllTable(){
+    public void readAllTable() {
         mDatabaseTable.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -255,16 +272,16 @@ public class FirebaseManager {
         });
     }
 
-    public void updateTable(String key, TableResponse tableResponse){
+    public void updateTable(String key, TableResponse tableResponse) {
         mDatabaseTable.child(key).setValue(tableResponse);
     }
 
 
     /**
-     Table User
+     * Table User
      **/
 
-    public void login(Context context, String user, String password){
+    public void login(Context context, String user, String password) {
         Query query = mDatabaseUser.orderByChild("username").equalTo(user);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -272,11 +289,11 @@ public class FirebaseManager {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     if (data.getValue(UserResponse.class).getPassword().equals(password)) {
-                        Utils.saveSharedPreferences(context, Constants.LOGIN_SUCCESS,data.getValue(UserResponse.class).getId());
-                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS,data.getValue(UserResponse.class)));
+                        Utils.saveSharedPreferences(context, Constants.LOGIN_SUCCESS, data.getValue(UserResponse.class).getId());
+                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
                         ConstactChange.USER_RESPONSE = data.getValue(UserResponse.class);
                     } else {
-                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_FAILL,null));
+                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_FAILL, null));
                     }
                 }
             }
@@ -287,13 +304,13 @@ public class FirebaseManager {
         });
     }
 
-    public void getUserbyID(String id){
+    public void getUserbyID(String id) {
         Query query = mDatabaseUser.orderByChild("id").equalTo(id);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS,data.getValue(UserResponse.class)));
+                    EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
                     ConstactChange.USER_RESPONSE = data.getValue(UserResponse.class);
                 }
             }
@@ -304,9 +321,9 @@ public class FirebaseManager {
         });
     }
 
-    public void updateUser(String key, UserResponse userResponse){
+    public void updateUser(String key, UserResponse userResponse) {
         mDatabaseUser.child(key).setValue(userResponse);
-        EventBus.getDefault().post(new EvenLogin(EventBusAction.UPDATE_USER_SUCCESS,null));
+        EventBus.getDefault().post(new EvenLogin(EventBusAction.UPDATE_USER_SUCCESS, null));
     }
 
 }

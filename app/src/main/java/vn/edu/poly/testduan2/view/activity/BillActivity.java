@@ -6,6 +6,7 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,16 +20,21 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import vn.edu.poly.testduan2.R;
 import vn.edu.poly.testduan2.common.ConstactChange;
+import vn.edu.poly.testduan2.common.evenBus.EvenBill;
 import vn.edu.poly.testduan2.common.evenBus.EvenTable;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
 import vn.edu.poly.testduan2.controller.BillAdapter;
+import vn.edu.poly.testduan2.interfaces.DataBillTable;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.net.response.BillResponse;
 import vn.edu.poly.testduan2.net.response.TableResponse;
@@ -52,6 +58,7 @@ public class BillActivity extends BaseActivity {
     private BillAdapter adapter;
     private BillResponse billResponse;
     private TableResponse tableResponse;
+    private List<BillResponse> list = new ArrayList<>();
     private FirebaseManager firebaseManager = new FirebaseManager();
 
     @Override
@@ -112,10 +119,10 @@ public class BillActivity extends BaseActivity {
                 } else {
                     tv_Table.setText(getString(R.string.key_buy_on));
                 }
-
                 break;
         }
     }
+
 
     @Override
     protected void rightButtonClicked(View v) {
@@ -128,16 +135,23 @@ public class BillActivity extends BaseActivity {
             case R.id.ll_status_order:
                 break;
             case R.id.tv_Pay:
-                firebaseManager.insertBill(billResponse);
-                if (tableResponse != null) {
-                    tableResponse.setStatus(1);
-                    firebaseManager.updateTable(tableResponse.getId(), tableResponse);
+                if (ConstactChange.Status_Table == 0){
+                    firebaseManager.insertBill(billResponse);
+                    if (tableResponse != null) {
+                        tableResponse.setStatus(1);
+                        firebaseManager.updateTable(tableResponse.getId(), tableResponse);
+                    }
+                    ConstactChange.productList.clear();
+                    EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
+                    Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BillActivity.this, MainActivity.class));
+                    finish();
+                }else {
+                    firebaseManager.updateBill(list.get(0).getId(),list.get(0));
+                    Toast.makeText(this, "Update Success!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BillActivity.this, MainActivity.class));
+                    finish();
                 }
-                ConstactChange.productList.clear();
-                EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
-                Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(BillActivity.this, MainActivity.class));
-                finish();
                 break;
             case R.id.tv_Noti:
                 break;
@@ -160,9 +174,20 @@ public class BillActivity extends BaseActivity {
 
     }
 
-    private void setUpIfOrder(){
-        if (ConstactChange.Status_Table == 1){
+    private void setUpIfOrder() {
+        if (ConstactChange.Status_Table == 1) {
             firebaseManager.bill(tableResponse.getId());
+            tvPay.setText(getString(R.string.key_update));
+
+            firebaseManager.setDataBillTable(new DataBillTable() {
+                @Override
+                public void getData(List<BillResponse> item) {
+                    list = item;
+                    setUp(list.get(0));
+                    tvTotal.setText(list.get(0).getTotal());
+                    setUptotal();
+                }
+            });
         }
     }
 

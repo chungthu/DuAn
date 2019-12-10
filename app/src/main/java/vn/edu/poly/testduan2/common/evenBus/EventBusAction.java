@@ -10,5 +10,6 @@ public class EventBusAction {
     public static final String LOGIN_FAILL = "LOGIN_FAILL";
     public static final String UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
     public static final String TABLE_SELECT = "TABLE_SELECT";
+    public static final String BIll_TABLE = "BIll_TABLE";
 
 }
