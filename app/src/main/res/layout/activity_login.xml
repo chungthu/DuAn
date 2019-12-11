@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/edtUser"
-        android:text="admin"
         android:hint="@string/user" />
 
     <EditText
@@ -31,7 +30,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/edtPass"
         android:hint="@string/password"
-        android:text="12345678"
         android:inputType="textPassword" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,15 +38,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="60dp">
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/check"
-            android:text="@string/tvRemember"
-            tools:ignore="MissingConstraints" />
 
         <TextView
+            android:id="@+id/tv_confimpassword"
             android:layout_width="wrap_content"
             android:layout_height="17dp"
             android:layout_marginEnd="8dp"

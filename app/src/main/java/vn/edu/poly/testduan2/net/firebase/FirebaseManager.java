@@ -299,7 +299,7 @@ public class FirebaseManager {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     if (data.getValue(UserResponse.class).getPassword().equals(password)) {
                         Utils.saveSharedPreferences(context, Constants.LOGIN_SUCCESS, data.getValue(UserResponse.class).getId());
-                        EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
+                        EventBus.getDefault().post(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
                         ConstactChange.USER_RESPONSE = data.getValue(UserResponse.class);
                     } else {
                         EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_FAILL, null));
@@ -319,7 +319,7 @@ public class FirebaseManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    EventBus.getDefault().postSticky(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
+                    EventBus.getDefault().post(new EvenLogin(EventBusAction.LOGIN_SUCCESS, data.getValue(UserResponse.class)));
                     ConstactChange.USER_RESPONSE = data.getValue(UserResponse.class);
                 }
             }

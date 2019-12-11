@@ -4,47 +4,28 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SignatureException;
-import java.security.UnrecoverableEntryException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import androidx.annotation.Nullable;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.internal.Utils;
 import dmax.dialog.SpotsDialog;
 import vn.edu.poly.testduan2.R;
-import vn.edu.poly.testduan2.common.ConstactChange;
 import vn.edu.poly.testduan2.common.evenBus.EvenLogin;
-import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
-import vn.edu.poly.testduan2.common.evenBus.LoginEven;
-import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 
 public class LoginActivity extends BaseActivity {
@@ -53,10 +34,10 @@ public class LoginActivity extends BaseActivity {
     EditText edtUser;
     @BindView(R.id.edtPass)
     EditText edtPass;
-    @BindView(R.id.checkBox)
-    CheckBox checkBox;
     @BindView(R.id.btnLogin)
     Button btnLogin;
+    @BindView(R.id.tv_confimpassword)
+    TextView tvConfimpassword;
     private FirebaseManager firebaseManager = new FirebaseManager();
     public AlertDialog waitingDialog;
     private AlertDialog.Builder dialogLoginFaill;
@@ -78,15 +59,11 @@ public class LoginActivity extends BaseActivity {
 
             }
         });
-
-        edtUser.setText("chungnt");
     }
 
-    @OnClick({R.id.checkBox, R.id.btnLogin})
+    @OnClick({R.id.btnLogin})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.checkBox:
-                break;
             case R.id.btnLogin:
                 login();
                 break;
@@ -117,7 +94,7 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void handleLoginEvent(EvenLogin event) throws IOException {
         switch (event.action) {
             case EventBusAction.LOGIN_SUCCESS:
@@ -152,5 +129,18 @@ public class LoginActivity extends BaseActivity {
         super.onStop();
         if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
+    }
+
+    @OnClick(R.id.tv_confimpassword)
+    public void onViewClicked() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage("Contact manager to reset password!");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
 }
