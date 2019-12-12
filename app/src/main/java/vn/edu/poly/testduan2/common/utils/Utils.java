@@ -51,7 +51,10 @@ public class Utils {
     }
 
     public static String nameBill(){
-        return "BILL_"+ConstactChange.USER_RESPONSE.getUsername()+"0"+ConstactChange.USER_RESPONSE.getBill_position();
+        if (ConstactChange.USER_RESPONSE != null) {
+            return "BILL_" + ConstactChange.USER_RESPONSE.getUsername() + "0" + ConstactChange.USER_RESPONSE.getBill_position();
+        }
+        return "";
     }
 
     public static void hideKeyboard(Activity activity) {

@@ -68,7 +68,6 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected void initialize(@Nullable Bundle savedInstanceState) {
-        setUptotal();
     }
 
     @Override
@@ -135,7 +134,7 @@ public class BillActivity extends BaseActivity {
             case R.id.ll_status_order:
                 break;
             case R.id.tv_Pay:
-                if (ConstactChange.Status_Table == 0){
+                if (ConstactChange.Status_Table == 0) {
                     firebaseManager.insertBill(billResponse);
                     if (tableResponse != null) {
                         tableResponse.setStatus(1);
@@ -146,8 +145,8 @@ public class BillActivity extends BaseActivity {
                     Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BillActivity.this, MainActivity.class));
                     finish();
-                }else {
-                    firebaseManager.updateBill(list.get(0).getId(),list.get(0));
+                } else {
+                    firebaseManager.updateBill(list.get(0).getId(), list.get(0));
                     Toast.makeText(this, "Update Success!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BillActivity.this, MainActivity.class));
                     finish();
@@ -171,7 +170,6 @@ public class BillActivity extends BaseActivity {
             }
             tvTotal.setText(String.valueOf(total));
         }
-
     }
 
     private void setUpIfOrder() {
@@ -183,15 +181,16 @@ public class BillActivity extends BaseActivity {
                 @Override
                 public void getData(List<BillResponse> item) {
                     list = item;
-                    setUp(list.get(0));
-                    tvTotal.setText(list.get(0).getTotal());
-                    setUptotal();
+                    if (list != null){
+                        setUp(list.get(0));
+                        tvTotal.setText(list.get(0).getTotal());
+                    }
                 }
             });
         }
     }
 
-    private void setUptotal() {
+    private void setUptotal(BillResponse billResponse) {
         tvTotal.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -206,7 +205,6 @@ public class BillActivity extends BaseActivity {
                     }
                     tvTotal.setText(String.valueOf(total));
                 }
-                updateNavigationBar();
             }
 
             @Override

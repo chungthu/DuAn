@@ -20,9 +20,9 @@
     <string name="title_milk_tea">Milk </string>
     <string name="title_fruit">Fruit</string>
 
-    <string name="user">Tên tài khoản</string>
-    <string name="password">Mật khẩu</string>
-    <string name="btnLogin">Đăng nhập</string>
+    <string name="user">User name</string>
+    <string name="password">Password</string>
+    <string name="btnLogin">Login</string>
     <string name="btnSizeM">Size M: 20.000 đ</string>
     <string name="btnSizeL">Size L: 30.000 đ</string>
     <string name="rd1">Giảm 20%</string>
@@ -55,7 +55,7 @@
     <string name="tvToppingYes">Có</string>
     <string name="tvToppingNo">Không</string>
     <string name="tvRemember">Nhớ</string>
-    <string name="tvForgetPass">Quên mật khẩu ?</string>
+    <string name="tvForgetPass">Forgot password ?</string>
     <string name="tvType">Loại:</string>
     <string name="tvname">Tên:</string>
     <string name="Delete">Delete</string>

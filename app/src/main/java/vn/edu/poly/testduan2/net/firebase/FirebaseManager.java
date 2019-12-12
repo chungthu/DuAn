@@ -38,7 +38,8 @@ import vn.edu.poly.testduan2.net.response.UserResponse;
 
 public class FirebaseManager {
     private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
-    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
+//    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
+    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product");
     private static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
     public static DatabaseReference mDatabaseBill = FirebaseDatabase.getInstance().getReference("Bill");
     private static DatabaseReference mDatabaseTable = FirebaseDatabase.getInstance().getReference("Table");
