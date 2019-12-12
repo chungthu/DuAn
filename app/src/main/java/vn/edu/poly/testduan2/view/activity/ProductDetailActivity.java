@@ -54,7 +54,7 @@ public class ProductDetailActivity extends BaseActivity {
     private MilkTeaFirebase milkTea;
     private FruitFirebase fruit;
     private BreadFirebase bread;
-    private String title;
+    private String title = "";
     private String images;
 
     @Override
@@ -69,7 +69,7 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     protected String getNavigationTitle() {
-        return "SP " + title;
+        return title;
     }
 
 
@@ -144,6 +144,8 @@ public class ProductDetailActivity extends BaseActivity {
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
         images = item.getImage();
+        title = item.getName();
+        updateNavigationBar();
     }
 
     private void setUpFruit(FruitFirebase item) {
@@ -156,6 +158,8 @@ public class ProductDetailActivity extends BaseActivity {
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
         images = item.getImage();
+        title = item.getName();
+        updateNavigationBar();
     }
 
     private void setUpBread(BreadFirebase item) {
@@ -168,6 +172,8 @@ public class ProductDetailActivity extends BaseActivity {
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
         images = item.getImage();
+        title = item.getName();
+        updateNavigationBar();
     }
 
     private void setupTotal() {

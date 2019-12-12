@@ -84,7 +84,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         NavigationStyle style = getNavigationStyle();
         switch (style) {
             case Backable:
-                navLeftButton.setImageResource(R.drawable.ic_close_whith_24dp);
+                navLeftButton.setImageResource(R.drawable.ic_chevron_left_black_24dp);
                 navLeftButton.setOnClickListener(v -> backButtonClicked(v));
                 navRightButton.setVisibility(View.VISIBLE);
                 navRightButton.setOnClickListener(v -> rightButtonClicked(v));

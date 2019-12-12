@@ -17,10 +17,8 @@ public class ConstactChange {
     public static BreadFirebase BREAD;
     public static List<Product> productList = new ArrayList<>();
     public static int id_position = 1;
-
     public static UserResponse USER_RESPONSE;
     public static int Status_Table = 0;
-
     public static List<MilkTeaFirebase> listMilkTeaSearch = new ArrayList<>();
     public static List<FruitFirebase> listFruitSearch = new ArrayList<>();
     public static List<BreadFirebase> listBreadSearch = new ArrayList<>();

@@ -33,6 +33,7 @@ import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.common.utils.Utils;
 import vn.edu.poly.testduan2.controller.BillAdapter;
 import vn.edu.poly.testduan2.interfaces.DataBillTable;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
@@ -60,6 +61,7 @@ public class BillActivity extends BaseActivity {
     private TableResponse tableResponse;
     private List<BillResponse> list = new ArrayList<>();
     private FirebaseManager firebaseManager = new FirebaseManager();
+    private String title = "";
 
     @Override
     protected int getActivityLayoutId() {
@@ -72,14 +74,17 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected String getNavigationTitle() {
-        return "BillResponse";
+        if (ConstactChange.Status_Table == 1){
+            return title;
+        }
+        return Utils.nameBill();
     }
 
-    @SuppressLint("NewApi")
-    @Override
-    protected Icon getRightButtonIcon() {
-        return Icon.createWithResource(this, R.drawable.ic_more_horiz_white_24dp);
-    }
+//    @SuppressLint("NewApi")
+//    @Override
+//    protected Icon getRightButtonIcon() {
+//        return Icon.createWithResource(this, R.drawable.ic_more_horiz_white_24dp);
+//    }
 
 
     @Override
@@ -94,6 +99,14 @@ public class BillActivity extends BaseActivity {
         super.onStop();
         if (EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (ConstactChange.Status_Table == 1){
+            ConstactChange.productList.clear();
+        }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
@@ -142,7 +155,7 @@ public class BillActivity extends BaseActivity {
                     }
                     ConstactChange.productList.clear();
                     EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
-                    Toast.makeText(this, "Pay Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Order Success!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(BillActivity.this, MainActivity.class));
                     finish();
                 } else {
@@ -182,36 +195,18 @@ public class BillActivity extends BaseActivity {
                 public void getData(List<BillResponse> item) {
                     list = item;
                     if (list != null){
-                        setUp(list.get(0));
-                        tvTotal.setText(list.get(0).getTotal());
+                        title = list.get(0).getName();
+                        updateNavigationBar();
+                        billResponse = list.get(0);
+                        setUp(billResponse);
+                        ConstactChange.productList.clear();
+                        ConstactChange.productList = billResponse.getProducts();
+                        tvTotal.setText(billResponse.getTotal());
                     }
                 }
             });
         }
     }
 
-    private void setUptotal(BillResponse billResponse) {
-        tvTotal.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (billResponse != null) {
-                    int total = 0;
-                    for (int j = 0; j < billResponse.getProducts().size(); j++) {
-                        total = total + Integer.parseInt(billResponse.getProducts().get(j).getTotal());
-                    }
-                    tvTotal.setText(String.valueOf(total));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-    }
 
 }
