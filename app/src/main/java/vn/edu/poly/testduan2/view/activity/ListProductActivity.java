@@ -27,6 +27,7 @@ import java.util.Locale;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -92,16 +93,6 @@ public class ListProductActivity extends BaseActivity {
         return getString(R.string.key_choose_food);
     }
 
-    @SuppressLint("NewApi")
-    @Override
-    protected Icon getRightButtonIcon() {
-        return Icon.createWithResource(this, R.drawable.ic_search_white_24dp);
-    }
-
-    @Override
-    protected void rightButtonClicked(View v) {
-        Search();
-    }
 
     @Override
     protected void leftButtonClicked(View v) {
@@ -151,54 +142,58 @@ public class ListProductActivity extends BaseActivity {
     }
 
     private void addBill() {
-        if (ConstactChange.productList.size() > 0) {
-            startActivity(new Intent(this, BillActivity.class));
-            String key = FirebaseManager.mDatabaseBill.push().getKey();
-            Date currentTime = Calendar.getInstance().getTime();
-            String time = new SimpleDateFormat(Constants.DEFAULT_FORMAT_DATETIME, Locale.getDefault()).format(currentTime);
-            int total = 0;
-            for (int i = 0; i < ConstactChange.productList.size(); i++) {
-                total = total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
-            }
-            String totals = String.valueOf(total);
-            String namebill = Utils.nameBill();
-            if (tableResponse != null) {
-                BillResponse billResponse = new BillResponse(key,
-                        namebill,
-                        tableResponse.getId(),
-                        ConstactChange.productList,
-                        time,
-                        ConstactChange.USER_RESPONSE.getId(),
-                        totals,
-                        false);
-                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse, 0));
-                int i = ConstactChange.USER_RESPONSE.getBill_position();
-                i++;
-                ConstactChange.USER_RESPONSE.setBill_position(i);
-                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
+        if (ConstactChange.Status_Table == 0){
+            if (ConstactChange.productList.size() > 0) {
+                startActivity(new Intent(this, BillActivity.class));
+                String key = FirebaseManager.mDatabaseBill.push().getKey();
+                Date currentTime = Calendar.getInstance().getTime();
+                String time = new SimpleDateFormat(Constants.DEFAULT_FORMAT_DATETIME, Locale.getDefault()).format(currentTime);
+                int total = 0;
+                for (int i = 0; i < ConstactChange.productList.size(); i++) {
+                    total = total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
+                }
+                String totals = String.valueOf(total);
+                String namebill = Utils.nameBill();
+                if (tableResponse != null) {
+                    BillResponse billResponse = new BillResponse(key,
+                            namebill,
+                            tableResponse.getId(),
+                            ConstactChange.productList,
+                            time,
+                            ConstactChange.USER_RESPONSE.getId(),
+                            totals,
+                            false);
+                    EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL,billResponse, 0));
+                    int i = ConstactChange.USER_RESPONSE.getBill_position();
+                    i++;
+                    ConstactChange.USER_RESPONSE.setBill_position(i);
+                    firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
+                } else {
+                    BillResponse billResponse = new BillResponse(key,
+                            namebill,
+                            "",
+                            ConstactChange.productList,
+                            time,
+                            ConstactChange.USER_RESPONSE.getId(),
+                            totals,
+                            false);
+                    EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse, 0));
+                    int i = ConstactChange.USER_RESPONSE.getBill_position();
+                    i++;
+                    ConstactChange.USER_RESPONSE.setBill_position(i);
+                    firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
+                }
             } else {
-                BillResponse billResponse = new BillResponse(key,
-                        namebill,
-                        "",
-                        ConstactChange.productList,
-                        time,
-                        ConstactChange.USER_RESPONSE.getId(),
-                        totals,
-                        false);
-                EventBus.getDefault().postSticky(new MessageEvent(EventBusAction.DATA_BILL, billResponse, 0));
-                int i = ConstactChange.USER_RESPONSE.getBill_position();
-                i++;
-                ConstactChange.USER_RESPONSE.setBill_position(i);
-                firebaseManager.updateUser(ConstactChange.USER_RESPONSE.getId(), ConstactChange.USER_RESPONSE);
+                Toast.makeText(this, "You need to choose at least 1 product!", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(this, "You need to choose at least 1 product!", Toast.LENGTH_SHORT).show();
+        }else {
+            finish();
         }
     }
 
     private void Search() {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.nav_container1,new SearchFragment());
+        transaction.replace(R.id.nav_container1, new SearchFragment());
         transaction.addToBackStack(null);
         transaction.commit();
     }

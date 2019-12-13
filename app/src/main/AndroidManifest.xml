@@ -20,7 +20,6 @@
         <activity android:name=".view.activity.BillActivity" />
         <activity android:name=".view.activity.ProductDetailActivity" />
         <activity android:name=".view.activity.ListProductActivity" />
-        <activity android:name=".view.activity.UpdateProductActivity" />
         <activity
             android:name=".view.activity.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar2">

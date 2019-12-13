@@ -10,21 +10,19 @@ public class MilkTeaFirebase {
     String id_catgory;
     String name_catgory;
     String image;
-    String priceM;
-    String priceL;
+    String price;
     String description;
 
     public MilkTeaFirebase() {
     }
 
-    public MilkTeaFirebase(String id, String name, String id_catgory, String name_catgory, String image, String priceM, String priceL, String description) {
+    public MilkTeaFirebase(String id, String name, String id_catgory, String name_catgory, String image, String price, String description) {
         this.id = id;
         this.name = name;
         this.id_catgory = id_catgory;
         this.name_catgory = name_catgory;
         this.image = image;
-        this.priceM = priceM;
-        this.priceL = priceL;
+        this.price = price;
         this.description = description;
     }
 
@@ -68,20 +66,12 @@ public class MilkTeaFirebase {
         this.image = image;
     }
 
-    public String getPriceM() {
-        return priceM;
+    public String getPrice() {
+        return price;
     }
 
-    public void setPriceM(String priceM) {
-        this.priceM = priceM;
-    }
-
-    public String getPriceL() {
-        return priceL;
-    }
-
-    public void setPriceL(String priceL) {
-        this.priceL = priceL;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getDescription() {

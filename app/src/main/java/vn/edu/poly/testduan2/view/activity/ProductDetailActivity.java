@@ -26,6 +26,7 @@ import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.common.evenBus.UpdateBillEvent;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
 import vn.edu.poly.testduan2.net.response.FruitFirebase;
 import vn.edu.poly.testduan2.net.response.MilkTeaFirebase;
@@ -139,8 +140,8 @@ public class ProductDetailActivity extends BaseActivity {
             Picasso.get().load(item.getImage()).into(imgImageProduct);
         }
         tvName.setText(item.getName());
-        tvPriceTitle.setText(item.getPriceM());
-        tvPrice.setText(item.getPriceM());
+        tvPriceTitle.setText(item.getPrice());
+        tvPrice.setText(item.getPrice());
         total.setText(String.valueOf(Integer.parseInt(tvPrice.getText().toString()) *
                 Integer.parseInt(tvAmount.getText().toString())));
         images = item.getImage();
@@ -202,7 +203,9 @@ public class ProductDetailActivity extends BaseActivity {
                 images,tvAmount.getText().toString(), tvPrice.getText().toString(), total.getText().toString()));
         ConstactChange.id_position++;
         EventBus.getDefault().post(new EvenUpdate(EvenUpdateAction.UPDATE_LIST_BILL_SIZE));
-
+        if (ConstactChange.Status_Table == 1){
+            EventBus.getDefault().post(new UpdateBillEvent(EventBusAction.UPDATE_BILL));
+        }
         finish();
     }
 

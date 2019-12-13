@@ -37,10 +37,7 @@ import vn.edu.poly.testduan2.net.response.TableResponse;
 import vn.edu.poly.testduan2.net.response.UserResponse;
 
 public class FirebaseManager {
-    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product").child("MilkTea");
-//    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product").child("Fruit");
-    private static DatabaseReference mDatabaseFruit = FirebaseDatabase.getInstance().getReference("Product");
-    private static DatabaseReference mDatabaseBread = FirebaseDatabase.getInstance().getReference("Product").child("Bread");
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Product");
     public static DatabaseReference mDatabaseBill = FirebaseDatabase.getInstance().getReference("Bill");
     private static DatabaseReference mDatabaseTable = FirebaseDatabase.getInstance().getReference("Table");
     private static DatabaseReference mDatabaseUser = FirebaseDatabase.getInstance().getReference("User");
@@ -78,34 +75,12 @@ public class FirebaseManager {
     }
 
     /**
-     * Table milk tea
+     * Read Product
      **/
-
-    //Insert
-    public void insertMilkTea(Context context, String name, String id_category, String name_category, String image,
-                              String priceM, String priceL, String description) {
-        String key_milkteaId = mDatabase.push().getKey();
-
-        MilkTeaFirebase item = new MilkTeaFirebase(key_milkteaId, name, id_category, "ROYAL CHEESE", image, priceM, priceL, description);
-
-        assert key_milkteaId != null;
-        mDatabase.child(key_milkteaId).setValue(item);
-    }
-
-    //Update
-    public void updateMilkTea(Context context, String id_product, MilkTeaFirebase item) {
-        mDatabase.child(id_product).setValue(item);
-    }
-
-    //Delete
-    public void deleteMilkTea(Context context, String id_product) {
-        assert id_product != null;
-        mDatabase.child(id_product).removeValue();
-    }
 
     //ReadAll
     public void reaAllDataTea() {
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("category_id").equalTo("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 item.clear();
@@ -125,35 +100,9 @@ public class FirebaseManager {
         });
     }
 
-
-    /**
-     * Table Fruit
-     **/
-
-
-    //Insert
-    public void insertFruit(Context context, String name, String image, String price, String description) {
-        String key = mDatabaseFruit.push().getKey();
-
-        FruitFirebase item = new FruitFirebase(key, name, image, price, description);
-
-        assert key != null;
-        mDatabaseFruit.child(key).setValue(item);
-    }
-
-    //Update
-    public void updateFruit(Context context, String id_product, FruitFirebase item) {
-        mDatabaseFruit.child(id_product).setValue(item);
-    }
-
-    //Delete
-    public void deleteFruit(Context context, String id_product) {
-        mDatabaseFruit.child(id_product).removeValue();
-    }
-
     //ReadAll
     public void reaAllFruit() {
-        mDatabaseFruit.addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("category_id").equalTo("2").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemFruit.clear();
@@ -173,36 +122,9 @@ public class FirebaseManager {
         });
     }
 
-
-    /**
-     * Table Bread
-     **/
-
-
-    //Insert
-    public void insertBread(Context context, String name, String image,
-                            String price, String description) {
-        String key = mDatabaseBread.push().getKey();
-
-        BreadFirebase item = new BreadFirebase(key, name, image, price, description);
-
-        assert key != null;
-        mDatabaseBread.child(key).setValue(item);
-    }
-
-    //Update
-    public void updateBread(Context context, String id_product, BreadFirebase item) {
-        mDatabaseBread.child(id_product).setValue(item);
-    }
-
-    //Delete
-    public void deleteBread(Context context, String id_product) {
-        mDatabaseBread.child(id_product).removeValue();
-    }
-
     //ReadAll
     public void readAllBread() {
-        mDatabaseBread.addValueEventListener(new ValueEventListener() {
+        mDatabase.orderByChild("category_id").equalTo("3").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemBr.clear();

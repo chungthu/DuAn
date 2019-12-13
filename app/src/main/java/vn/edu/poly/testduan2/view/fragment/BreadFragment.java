@@ -18,7 +18,6 @@ import vn.edu.poly.testduan2.controller.BreadAdapter;
 import vn.edu.poly.testduan2.net.firebase.FirebaseManager;
 import vn.edu.poly.testduan2.interfaces.DataBreadStatus;
 import vn.edu.poly.testduan2.net.response.BreadFirebase;
-import vn.edu.poly.testduan2.view.activity.UpdateProductActivity;
 
 public class BreadFragment extends BaseFragment {
 
@@ -70,31 +69,4 @@ public class BreadFragment extends BaseFragment {
 
     }
 
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int position = -1;
-        try {
-            position = adapter.getPosition();
-        } catch (Exception e) {
-            return super.onContextItemSelected(item);
-        }
-        switch (item.getItemId()) {
-            case 0:
-                ConstactChange.STATUS_ADD = 3;
-                ConstactChange.BREAD = list.get(position);
-                startActivity(new Intent(getActivity(), UpdateProductActivity.class));
-                break;
-            case 1:
-                firebaseManager.deleteBread(getContext(), list.get(position).getId());
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-//    @OnClick(R.id.fb_add3)
-//    public void onViewClicked() {
-//        ConstactChange.STATUS_ADD = 3;
-//        startActivity(new Intent(getActivity(), AddProductCHActivity.class));
-//    }
 }

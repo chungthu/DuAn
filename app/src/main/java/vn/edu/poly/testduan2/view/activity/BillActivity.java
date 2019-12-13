@@ -33,6 +33,7 @@ import vn.edu.poly.testduan2.common.evenBus.EvenUpdate;
 import vn.edu.poly.testduan2.common.evenBus.EvenUpdateAction;
 import vn.edu.poly.testduan2.common.evenBus.EventBusAction;
 import vn.edu.poly.testduan2.common.evenBus.MessageEvent;
+import vn.edu.poly.testduan2.common.evenBus.UpdateBillEvent;
 import vn.edu.poly.testduan2.common.utils.Utils;
 import vn.edu.poly.testduan2.controller.BillAdapter;
 import vn.edu.poly.testduan2.interfaces.DataBillTable;
@@ -70,54 +71,35 @@ public class BillActivity extends BaseActivity {
 
     @Override
     protected void initialize(@Nullable Bundle savedInstanceState) {
+
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
+
     }
 
     @Override
     protected String getNavigationTitle() {
-        if (ConstactChange.Status_Table == 1){
+        if (ConstactChange.Status_Table == 1) {
             return title;
         }
         return Utils.nameBill();
     }
 
-//    @SuppressLint("NewApi")
-//    @Override
-//    protected Icon getRightButtonIcon() {
-//        return Icon.createWithResource(this, R.drawable.ic_more_horiz_white_24dp);
-//    }
-
-
+    @SuppressLint("NewApi")
     @Override
-    public void onStart() {
-        super.onStart();
-        if (!EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().register(this);
+    protected Icon getRightButtonIcon() {
+        return Icon.createWithResource(this, R.drawable.ic_add_black_24dp);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().unregister(this);
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (ConstactChange.Status_Table == 1){
+        if (ConstactChange.Status_Table == 1) {
             ConstactChange.productList.clear();
         }
-    }
-
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
-    public void handleEvent(MessageEvent event) {
-        switch (event.action) {
-            case EventBusAction.DATA_BILL:
-                billResponse = (BillResponse) event.object;
-                setUp(billResponse);
-                break;
-        }
-        updateNavigationBar();
+        if (EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
@@ -135,10 +117,34 @@ public class BillActivity extends BaseActivity {
         }
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN_ORDERED)
+    public void handleEvent(MessageEvent event) {
+        switch (event.action) {
+            case EventBusAction.DATA_BILL:
+                billResponse = (BillResponse) event.object;
+                setUp(billResponse);
+                break;
+        }
+        updateNavigationBar();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleUpdateProductBillEvent(UpdateBillEvent event) {
+        switch (event.action) {
+            case EventBusAction.UPDATE_BILL:
+                adapter.update(ConstactChange.productList);
+                String total = Utils.getTotal();
+                tvTotal.setText(total);
+                break;
+        }
+        updateNavigationBar();
+    }
+
 
     @Override
     protected void rightButtonClicked(View v) {
         super.rightButtonClicked(v);
+        startActivity(new Intent(BillActivity.this, ListProductActivity.class));
     }
 
     @OnClick({R.id.ll_status_order, R.id.tv_Pay, R.id.tv_Noti})
@@ -194,7 +200,7 @@ public class BillActivity extends BaseActivity {
                 @Override
                 public void getData(List<BillResponse> item) {
                     list = item;
-                    if (list != null){
+                    if (list != null) {
                         title = list.get(0).getName();
                         updateNavigationBar();
                         billResponse = list.get(0);

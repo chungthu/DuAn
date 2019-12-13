@@ -50,7 +50,7 @@ public class Utils {
         editor.apply();
     }
 
-    public static String nameBill(){
+    public static String nameBill() {
         if (ConstactChange.USER_RESPONSE != null) {
             return "BILL_" + ConstactChange.USER_RESPONSE.getUsername() + "0" + ConstactChange.USER_RESPONSE.getBill_position();
         }
@@ -106,5 +106,28 @@ public class Utils {
             sb.setCharAt(i, removeAccent(sb.charAt(i)));
         }
         return sb.toString();
+    }
+
+    public static String getTotal() {
+        String total;
+        int number_total = 0;
+        if (ConstactChange.productList != null) {
+            for (int i = 0; i < ConstactChange.productList.size(); i++) {
+                number_total = number_total + Integer.parseInt(ConstactChange.productList.get(i).getTotal());
+            }
+            total = String.valueOf(number_total);
+            return total;
+        }
+        return "";
+    }
+
+    public static void setTotalProduct() {
+        if (ConstactChange.productList != null) {
+            for (int i = 0; i < ConstactChange.productList.size(); i++) {
+                int i1 = Integer.parseInt(ConstactChange.productList.get(i).getAmount());
+                int i2 = Integer.parseInt(ConstactChange.productList.get(i).getPrice());
+                ConstactChange.productList.get(i).setTotal(String.valueOf(i1 * i2));
+            }
+        }
     }
 }

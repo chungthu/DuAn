@@ -51,7 +51,7 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.Viewhold
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
         holder.tvMilk.setText(list.get(position).getName());
-        holder.tvprice.setText(list.get(position).getPriceM());
+        holder.tvprice.setText(list.get(position).getPrice());
         if (list.get(position).getImage() != null && !list.get(position).getImage().equals("")) {
             Picasso.get().load(list.get(position).getImage()).into(holder.imgMilk);
         }
